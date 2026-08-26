@@ -5,8 +5,8 @@ const ReportsView = ({ trades }) => {
   // Only process completed trades for the report
   const completedTrades = trades.filter(t => t.status === 'WIN' || t.status === 'LOSS');
   
-  const intradayTrades = completedTrades.filter(t => t.signal?.type === 'intraday');
-  const longTermTrades = completedTrades.filter(t => t.signal?.type === 'long term');
+  const intradayTrades = trades.filter(t => t.signal?.type === 'intraday');
+  const longTermTrades = trades.filter(t => t.signal?.type === 'long term');
   
   const wins = completedTrades.filter(t => t.status === 'WIN').length;
   const losses = completedTrades.filter(t => t.status === 'LOSS').length;
@@ -61,8 +61,8 @@ const ReportsView = ({ trades }) => {
         <h2 className="section-title">
           <span style={{ color: 'var(--text-primary)' }}>📊</span> Trade History Log
         </h2>
-        {completedTrades.length === 0 ? (
-          <div className="empty-state">No completed trades available yet.</div>
+        {trades.length === 0 ? (
+          <div className="empty-state">No trades available yet.</div>
         ) : (
           <>
             <TradeTable trades={intradayTrades} title="Intraday History" />
