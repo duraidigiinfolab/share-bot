@@ -1,0 +1,51 @@
+name: Share Market Bot Auto-Trader
+
+on:
+  schedule:
+    # 03:45 UTC is 09:15 AM IST (Market Open) - Monday to Friday
+    - cron: '45 3 * * 1-5'
+    # 10:00 UTC is 03:30 PM IST (Market Close) - Monday to Friday
+    - cron: '0 10 * * 1-5'
+  workflow_dispatch: # Allows manual testing from GitHub website
+
+permissions:
+  contents: write # CRITICAL: Allows the bot to save tracker.json back to GitHub
+
+jobs:
+  run-market-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Morning Analysis (Market Open)
+        if: github.event.schedule == '45 3 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python main.py --morning
+
+      - name: Run Evening Evaluation (Market Close)
+        if: github.event.schedule == '0 10 * * 1-5'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python main.py --evening
+
+      - name: Save memory (tracker.json) back to GitHub
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tracker.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update memory: tracker.json" && git push)

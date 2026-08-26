@@ -1,0 +1,12 @@
+# Environment Variables (Keep Secrets Safe!)
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# User reference files
+ref.md
+ref.py
+
+# Note: tracker.json is NOT ignored because GitHub Actions needs to read/write it!
