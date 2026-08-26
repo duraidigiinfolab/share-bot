@@ -1,5 +1,18 @@
 import React from 'react';
 
+const companyNames = {
+  'RELIANCE': 'Reliance Industries Ltd',
+  'TCS': 'Tata Consultancy Services Ltd',
+  'HDFCBANK': 'HDFC Bank Limited',
+  'ICICIBANK': 'ICICI Bank Ltd',
+  'INFY': 'Infosys Ltd',
+  'SBIN': 'State Bank of India',
+  'BHARTIARTL': 'Bharti Airtel Ltd',
+  'ITC': 'ITC Ltd',
+  'LT': 'Larsen & Toubro Ltd',
+  'BAJFINANCE': 'Bajaj Finance Ltd'
+};
+
 const TradeTable = ({ trades, title }) => {
   if (trades.length === 0) {
     return <div className="empty-state">No {title.toLowerCase()} available.</div>;
@@ -12,7 +25,7 @@ const TradeTable = ({ trades, title }) => {
         <thead>
           <tr>
             <th>Date</th>
-            <th>Stock</th>
+            <th style={{ minWidth: '220px' }}>Stock</th>
             <th>Action</th>
             <th>Status</th>
             <th>Entry</th>
@@ -32,11 +45,17 @@ const TradeTable = ({ trades, title }) => {
               const diff = Math.abs(signal.target_1 - signal.entry_point);
               expectedPnL = ((diff / signal.entry_point) * 100).toFixed(2);
             }
+            
+            const symbol = trade.stock.replace('.NS', '');
+            const fullName = companyNames[symbol] || symbol;
 
             return (
               <tr key={index}>
                 <td style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{trade.date.split(' ')[0]}</td>
-                <td style={{ fontWeight: 'bold' }}>{trade.stock.replace('.NS', '')}</td>
+                <td style={{ fontWeight: 'bold' }}>
+                    <div style={{ textTransform: 'uppercase' }}>{fullName}</div>
+                    <div style={{ color: 'var(--accent-blue)', fontSize: '0.85em', marginTop: '0.2rem' }}>({symbol})</div>
+                </td>
                 <td><span className={badgeClass}>{signal.buy_or_sell}</span></td>
                 <td>
                   {trade.status === 'PENDING' && <span className="badge pending">PENDING</span>}
