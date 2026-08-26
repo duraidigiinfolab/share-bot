@@ -95,45 +95,51 @@ def run_morning_analysis():
         send_telegram("No high-probability setups found by the screener today.")
         return
         
-    send_telegram(f"🔍 Pre-screener found {len(filtered_tickers)} high-probability stocks out of {len(tickers)}. Passing to AI for deep analysis...")
+    send_telegram(f"🔍 Pre-screener found {len(filtered_tickers)} high-probability stocks out of {len(tickers)}. Compiling data for AI Batch Analysis...")
+    
+    intraday_batch_texts = []
+    longterm_batch_texts = []
     
     for ticker in filtered_tickers:
         news = data_engine.get_latest_news(ticker)
         
-        # We run both bots for every filtered stock
-        run_intra = True
-        run_long = True
-        
-        intraday_prompt = None
-        longterm_prompt = None
-        
-        if run_intra:
-            intra_data = data_engine.fetch_stock_data(ticker, period="5d", interval="15m")
-            if intra_data:
-                intraday_prompt = data_engine.format_data_for_ai(intra_data, news)
-                
-        if run_long:
-            long_data = data_engine.fetch_stock_data(ticker, period="6mo", interval="1d")
-            if long_data:
-                longterm_prompt = data_engine.format_data_for_ai(long_data, news)
-                
-        if not intraday_prompt and not longterm_prompt:
-            continue
+        # Intra
+        intra_data = data_engine.fetch_stock_data(ticker, period="5d", interval="15m")
+        if intra_data:
+            intraday_batch_texts.append(data_engine.format_data_for_ai(intra_data, news))
             
-        intraday, longterm = ai_bots.analyze_stock(ticker, intraday_prompt, longterm_prompt)
+        # Long
+        long_data = data_engine.fetch_stock_data(ticker, period="6mo", interval="1d")
+        if long_data:
+            longterm_batch_texts.append(data_engine.format_data_for_ai(long_data, news))
+            
+    # Combine into massive strings
+    intraday_combined = "\n\n==========================\n\n".join(intraday_batch_texts)
+    longterm_combined = "\n\n==========================\n\n".join(longterm_batch_texts)
+    
+    send_telegram("🤖 Sending batch data to Gemini AI...")
+    
+    # 1 Single API call for Intraday, 1 for Long Term
+    intraday_signals, longterm_signals = ai_bots.analyze_batch(intraday_combined, longterm_combined)
+    
+    total_signals = len(intraday_signals) + len(longterm_signals)
+    if total_signals == 0:
+        send_telegram("AI evaluated all stocks but found 0 valid setups.")
+        return
         
-        # Process Intraday
-        if intraday and intraday.get("buy_or_sell") in ["BUY", "SELL"]:
-            tracker.add_signal(ticker, intraday)
-            send_telegram(format_signal_message(ticker, intraday))
+    # Process Intraday Signals (it's an array now)
+    for signal in intraday_signals:
+        if signal.get("buy_or_sell") in ["BUY", "SELL"]:
+            stock = signal.get("stock", "UNKNOWN")
+            tracker.add_signal(stock, signal)
+            send_telegram(format_signal_message(stock, signal))
             
-        # Process Long Term
-        if longterm and longterm.get("buy_or_sell") in ["BUY", "SELL"]:
-            tracker.add_signal(ticker, longterm)
-            send_telegram(format_signal_message(ticker, longterm))
-            
-        # Sleep to avoid hitting Gemini API rate limits
-        time.sleep(2)
+    # Process Long Term Signals
+    for signal in longterm_signals:
+        if signal.get("buy_or_sell") in ["BUY", "SELL"]:
+            stock = signal.get("stock", "UNKNOWN")
+            tracker.add_signal(stock, signal)
+            send_telegram(format_signal_message(stock, signal))
 
 def run_evening_evaluation():
     """Runs at Market Close to verify if previous signals hit targets."""

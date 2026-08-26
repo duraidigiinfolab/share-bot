@@ -14,29 +14,30 @@ except Exception as e:
     client = None
     print(f"Failed to initialize Gemini Client: {e}")
 
-def get_trading_signal(stock_text_data, trade_type):
+def get_batch_trading_signals(batch_text_data, trade_type):
     """
-    Asks Gemini to analyze the stock data and output a JSON signal.
+    Asks Gemini to analyze a huge block of multiple stocks and output a JSON array of the best trades.
     trade_type: 'intraday' or 'long term'
     """
     if not client:
         print("Gemini client not initialized. Check GEMINI_API_KEY.")
-        return None
+        return []
         
     system_prompt = f"""
-You are an expert quantitative trader analyzing NSE stocks.
-Analyze the provided 10-day historical trend (Price, RSI, MACD), fundamental data, and recent news.
-Determine if the stock is a BUY, SELL, or HOLD for {trade_type} trading.
+You are an expert quantitative trader analyzing a batch of NSE stocks.
+You will be provided with a large text block containing the 10-day historical trend (Price, RSI, MACD), fundamental data, and recent news for MULTIPLE stocks.
 
 CRITICAL RULES FOR ANALYSIS:
-1. Carefully analyze the 10-Day Historical Trend table. Look for momentum shifts, consecutive higher highs, or RSI/MACD crossovers over the last 10 days.
-2. If the 10-day trend is strong, recommend a BUY or SELL. If the trend is sideways or weak, output HOLD.
-3. Determine exact Targets (Target 1, Target 2, Target 3) and a Stop Loss based on the historical support and resistance levels visible in the 10-day High/Low prices, combined with the current Volatility (ATR).
+1. Carefully analyze the 10-Day Historical Trend table for EVERY stock provided. Look for momentum shifts, consecutive higher highs, or RSI/MACD crossovers.
+2. Filter out weak or sideways stocks. Pick only the absolute BEST setups (maximum 5).
+3. For the chosen stocks, determine exact Targets (Target 1, Target 2, Target 3) and a Stop Loss based on the historical support and resistance levels visible in their 10-day High/Low prices, combined with their current Volatility (ATR).
 4. Set entry_point exactly to the Current Price (the most recent Close price in the table).
 
-Return the response STRICTLY as a valid JSON object with the following schema:
-{{
-    "buy_or_sell": "BUY",  // or "SELL" or "HOLD"
+Return the response STRICTLY as a valid JSON ARRAY of objects. Even if there is only 1 trade, it must be inside an array `[]`. If no stocks are good, return `[]`.
+Schema for each object in the array:
+[{{
+    "stock": "SYMBOL.NS", // The stock ticker symbol
+    "buy_or_sell": "BUY",  // or "SELL"
     "type": "{trade_type}",
     "time_period": "{'1 Day' if trade_type == 'intraday' else '3-6 Months'}",
     "open_price": 0.0,
@@ -46,42 +47,46 @@ Return the response STRICTLY as a valid JSON object with the following schema:
     "target_3": 0.0,
     "stop_loss": 0.0,
     "reasoning": "Explain your analysis of the 10-day trend and why you chose these specific targets."
-}}
+}}]
     """
     
     try:
         response = client.models.generate_content(
             model='gemini-3.6-flash',
-            contents=stock_text_data,
+            contents=batch_text_data,
             config=types.GenerateContentConfig(
                 system_instruction=system_prompt,
                 response_mime_type="application/json",
-                temperature=0.2 # low temp for more analytical responses
+                temperature=0.2
             )
         )
         
-        # Parse JSON
         result = json.loads(response.text)
-        return result
+        if isinstance(result, list):
+            return result
+        elif isinstance(result, dict):
+            # Fallback if AI wraps it in an object instead of array
+            return [result]
+        return []
         
     except Exception as e:
-        print(f"Error generating AI signal: {e}")
-        return None
+        print(f"Error generating AI batch signal: {e}")
+        return []
 
-def analyze_stock(stock_symbol, intraday_text=None, longterm_text=None):
-    """Generates both intraday and long-term signals for a stock using respective datasets."""
-    intraday_signal = None
-    long_term_signal = None
+def analyze_batch(intraday_batch_text, longterm_batch_text):
+    """Generates both intraday and long-term batch signals."""
+    intraday_signals = []
+    long_term_signals = []
     
-    if intraday_text:
-        print(f"Running Intraday Bot for {stock_symbol}...")
-        intraday_signal = get_trading_signal(intraday_text, "intraday")
+    if intraday_batch_text:
+        print("Running AI Batch Analysis for Intraday...")
+        intraday_signals = get_batch_trading_signals(intraday_batch_text, "intraday")
         
-    if longterm_text:
-        print(f"Running Investment Bot for {stock_symbol}...")
-        long_term_signal = get_trading_signal(longterm_text, "long term")
+    if longterm_batch_text:
+        print("Running AI Batch Analysis for Investment...")
+        long_term_signals = get_batch_trading_signals(longterm_batch_text, "long term")
     
-    return intraday_signal, long_term_signal
+    return intraday_signals, long_term_signals
 
 if __name__ == "__main__":
     # Test script with dummy data
