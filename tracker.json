@@ -1,1 +1,155 @@
-[]
+[
+    {
+        "id": "1787722412.488479",
+        "stock": "TCS.NS",
+        "date": "2026-08-26 05:33:32",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "SELL",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "entry_point": 2284.3,
+            "target_1": 2270.0,
+            "target_2": 2258.0,
+            "target_3": 2245.0,
+            "stop_loss": 2298.0,
+            "reasoning": "Bearish MACD crossover and price trading below the 20-day SMA indicate strong intraday selling pressure."
+        }
+    },
+    {
+        "id": "1787722507.119212",
+        "stock": "ICICIBANK.NS",
+        "date": "2026-08-26 05:35:07",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "entry_point": 1438.4,
+            "target_1": 1448.0,
+            "target_2": 1455.0,
+            "target_3": 1465.0,
+            "stop_loss": 1427.0,
+            "reasoning": "Price shows strong upward momentum trading well above its 20-day SMA with a healthy RSI of 57.9."
+        }
+    },
+    {
+        "id": "1787722507.686127",
+        "stock": "ICICIBANK.NS",
+        "date": "2026-08-26 05:35:07",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "entry_point": 1438.4,
+            "target_1": 1510.0,
+            "target_2": 1560.0,
+            "target_3": 1620.0,
+            "stop_loss": 1385.0,
+            "reasoning": "Price maintains a strong uptrend above its 20-day and 50-day SMAs with a healthy RSI of 57.9 indicating continued momentum."
+        }
+    },
+    {
+        "id": "1787722529.82782",
+        "stock": "INFY.NS",
+        "date": "2026-08-26 05:35:29",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "SELL",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "entry_point": 1125.8,
+            "target_1": 1118.0,
+            "target_2": 1110.0,
+            "target_3": 1102.0,
+            "stop_loss": 1135.0,
+            "reasoning": "MACD bearish crossover and price trading below the 20-day SMA indicate strong intraday downward momentum."
+        }
+    },
+    {
+        "id": "1787722555.632769",
+        "stock": "SBIN.NS",
+        "date": "2026-08-26 05:35:55",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "entry_point": 1056.0,
+            "target_1": 1110.0,
+            "target_2": 1160.0,
+            "target_3": 1210.0,
+            "stop_loss": 1020.0,
+            "reasoning": "Price trades comfortably above the 50-day SMA with neutral RSI, confirming a strong underlying long-term uptrend."
+        }
+    },
+    {
+        "id": "1787722609.445179",
+        "stock": "BHARTIARTL.NS",
+        "date": "2026-08-26 05:36:49",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "SELL",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "entry_point": 1923.6,
+            "target_1": 1910.0,
+            "target_2": 1898.0,
+            "target_3": 1885.0,
+            "stop_loss": 1938.0,
+            "reasoning": "Bearish MACD crossover and trading below the 20-day SMA signal negative intraday momentum."
+        }
+    },
+    {
+        "id": "1787722635.548304",
+        "stock": "ITC.NS",
+        "date": "2026-08-26 05:37:15",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "SELL",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "entry_point": 272.05,
+            "target_1": 270.0,
+            "target_2": 268.5,
+            "target_3": 266.5,
+            "stop_loss": 274.1,
+            "reasoning": "Bearish momentum indicated by price trading below key moving averages and negative MACD crossover."
+        }
+    },
+    {
+        "id": "1787722700.03982",
+        "stock": "LT.NS",
+        "date": "2026-08-26 05:38:20",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "entry_point": 4075.0,
+            "target_1": 4250.0,
+            "target_2": 4400.0,
+            "target_3": 4550.0,
+            "stop_loss": 3940.0,
+            "reasoning": "Stock trades above key moving averages (20 and 50 SMAs) with positive MACD crossover indicating sustained bullish momentum."
+        }
+    },
+    {
+        "id": "1787722721.91788",
+        "stock": "BAJFINANCE.NS",
+        "date": "2026-08-26 05:38:41",
+        "status": "PENDING",
+        "signal": {
+            "buy_or_sell": "SELL",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "entry_point": 1087.9,
+            "target_1": 1078.0,
+            "target_2": 1070.0,
+            "target_3": 1060.0,
+            "stop_loss": 1096.0,
+            "reasoning": "Trading below the 20-period SMA combined with a bearish MACD crossover signals intraday downward pressure."
+        }
+    }
+]
