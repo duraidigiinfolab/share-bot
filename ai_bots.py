@@ -46,7 +46,7 @@ Return the response STRICTLY as a valid JSON object with the following schema:
     
     try:
         response = client.models.generate_content(
-            model='gemini-2.0-flash',
+            model='gemini-3.6-flash',
             contents=stock_text_data,
             config=types.GenerateContentConfig(
                 system_instruction=system_prompt,

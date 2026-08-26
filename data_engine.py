@@ -9,7 +9,7 @@ def get_nifty50_tickers():
     # NIFTY 50 Sample
     tickers = [
         "RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "ICICIBANK.NS", "INFY.NS",
-        "SBI.NS", "BHARTIARTL.NS", "ITC.NS", "L&T.NS", "BAJFINANCE.NS"
+        "SBIN.NS", "BHARTIARTL.NS", "ITC.NS", "LT.NS", "BAJFINANCE.NS"
     ]
     return tickers
 
