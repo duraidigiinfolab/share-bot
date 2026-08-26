@@ -2,13 +2,13 @@ import React from 'react';
 import TradeTable from './TradeTable';
 
 const ReportsView = ({ trades }) => {
-  const completedTrades = trades.filter(t => t.status === 'WIN' || t.status === 'LOSS');
+  const completedTrades = trades.filter(t => t.status.startsWith('WIN') || t.status.startsWith('LOSS'));
   
   const intradayTrades = trades.filter(t => t.signal?.type === 'intraday');
   const longTermTrades = trades.filter(t => t.signal?.type === 'long term');
   
-  const wins = completedTrades.filter(t => t.status === 'WIN').length;
-  const losses = completedTrades.filter(t => t.status === 'LOSS').length;
+  const wins = completedTrades.filter(t => t.status.startsWith('WIN')).length;
+  const losses = completedTrades.filter(t => t.status.startsWith('LOSS')).length;
   const total = wins + losses;
   
   const accuracy = total === 0 ? 0 : Math.round((wins / total) * 100);
