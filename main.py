@@ -58,7 +58,7 @@ def run_morning_analysis():
     msg = (
         "🌅 *Market Open!* Analyzing top stocks...\n\n"
         f"🎯 *Past 7 Days Accuracy:* {accuracy}%\n"
-        "📊 *Live Dashboard:* [View Reports](https://duraidigiinfolab.github.io/share-bot/)\n\n"
+        "📊 *Live Dashboard:* [View Reports](https://dura-share.vercel.app/)\n\n"
         "⚠️ *SEBI Disclaimer:* Not a SEBI registered analyst. Signals are algorithmically generated for educational & paper-trading purposes only. Not financial advice."
     )
     send_telegram(msg)
