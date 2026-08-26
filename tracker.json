@@ -3,7 +3,7 @@
         "id": "1787722412.488479",
         "stock": "TCS.NS",
         "date": "2026-08-26 05:33:32",
-        "status": "PENDING",
+        "status": "WIN (Target 1 Hit!)",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -88,7 +88,7 @@
         "id": "1787722609.445179",
         "stock": "BHARTIARTL.NS",
         "date": "2026-08-26 05:36:49",
-        "status": "PENDING",
+        "status": "WIN (Target 1 Hit!)",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
