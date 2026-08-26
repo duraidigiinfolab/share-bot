@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const TradeCard = ({ trade }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const signal = trade.signal || {};
   
   const isBuy = signal.buy_or_sell === 'BUY';
@@ -14,7 +15,11 @@ const TradeCard = ({ trade }) => {
   }
   
   return (
-    <div className="trade-card">
+    <div 
+      className="trade-card" 
+      onClick={() => setIsExpanded(!isExpanded)}
+      style={{ cursor: 'pointer' }}
+    >
       <div className="card-header">
         <span className="stock-name">{trade.stock.replace('.NS', '')}</span>
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -51,8 +56,20 @@ const TradeCard = ({ trade }) => {
         </div>
       </div>
       
+      {isExpanded && (
+        <div className="detailed-report" style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)' }}>
+          <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>AI Detailed Report</h4>
+          <p style={{ fontSize: '0.95rem', lineHeight: '1.5', color: 'var(--text-primary)' }}>
+            {signal.reasoning || "No detailed reasoning provided by the AI for this trade."}
+          </p>
+          <div style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+            <strong>Time Horizon:</strong> {signal.time_period || "N/A"}
+          </div>
+        </div>
+      )}
+      
       <div className="date-footer">
-        Generated: {trade.date} ({signal.type})
+        Generated: {trade.date} ({signal.type}) {isExpanded ? '▲' : '▼'}
       </div>
     </div>
   );
