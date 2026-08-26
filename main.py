@@ -99,16 +99,28 @@ def run_morning_analysis():
             print("All signal quotas met. Stopping analysis.")
             break
             
-        stock_data = data_engine.fetch_stock_data(ticker)
-        if not stock_data: continue
-            
         news = data_engine.get_latest_news(ticker)
-        ai_prompt_text = data_engine.format_data_for_ai(stock_data, news)
         
         run_intra = intraday_count < 5
         run_long = longterm_count < 2
         
-        intraday, longterm = ai_bots.analyze_stock(ticker, ai_prompt_text, run_intra, run_long)
+        intraday_prompt = None
+        longterm_prompt = None
+        
+        if run_intra:
+            intra_data = data_engine.fetch_stock_data(ticker, period="5d", interval="15m")
+            if intra_data:
+                intraday_prompt = data_engine.format_data_for_ai(intra_data, news)
+                
+        if run_long:
+            long_data = data_engine.fetch_stock_data(ticker, period="6mo", interval="1d")
+            if long_data:
+                longterm_prompt = data_engine.format_data_for_ai(long_data, news)
+                
+        if not intraday_prompt and not longterm_prompt:
+            continue
+            
+        intraday, longterm = ai_bots.analyze_stock(ticker, intraday_prompt, longterm_prompt)
         
         # Process Intraday
         if intraday and intraday.get("buy_or_sell") in ["BUY", "SELL"]:

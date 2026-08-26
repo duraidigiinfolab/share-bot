@@ -25,10 +25,15 @@ def get_trading_signal(stock_text_data, trade_type):
         
     system_prompt = f"""
 You are an expert quantitative trader analyzing NSE stocks.
-Analyze the provided technical indicators and recent news.
+Analyze the provided technical indicators, fundamental data, and recent news.
 Determine if the stock is a BUY, SELL, or HOLD for {trade_type} trading.
 If it is a BUY or SELL, provide realistic Entry Point, Target 1, Target 2, Target 3, and Stop Loss based on the current price and volatility.
-If the technicals are mixed or weak, output HOLD and 0 for prices.
+
+CRITICAL RULES:
+1. You MUST use the ATR (Average True Range) value to calculate a safe Stop-Loss distance to avoid premature stop outs.
+2. Ensure a strict Risk-to-Reward ratio. Target 1 must offer a better potential profit than the risk of hitting the Stop-Loss.
+3. For Long-Term trades, heavily weigh the Fundamental Data (P/E, Debt-to-Equity, Price to Book).
+4. If the technicals are mixed or weak, output HOLD and 0 for prices.
 
 Return the response STRICTLY as a valid JSON object with the following schema:
 {{
@@ -64,18 +69,18 @@ Return the response STRICTLY as a valid JSON object with the following schema:
         print(f"Error generating AI signal: {e}")
         return None
 
-def analyze_stock(stock_symbol, stock_text_data, run_intraday=True, run_longterm=True):
-    """Generates both intraday and long-term signals for a stock, skipping if quotas are met."""
+def analyze_stock(stock_symbol, intraday_text=None, longterm_text=None):
+    """Generates both intraday and long-term signals for a stock using respective datasets."""
     intraday_signal = None
     long_term_signal = None
     
-    if run_intraday:
+    if intraday_text:
         print(f"Running Intraday Bot for {stock_symbol}...")
-        intraday_signal = get_trading_signal(stock_text_data, "intraday")
+        intraday_signal = get_trading_signal(intraday_text, "intraday")
         
-    if run_longterm:
+    if longterm_text:
         print(f"Running Investment Bot for {stock_symbol}...")
-        long_term_signal = get_trading_signal(stock_text_data, "long term")
+        long_term_signal = get_trading_signal(longterm_text, "long term")
     
     return intraday_signal, long_term_signal
 
