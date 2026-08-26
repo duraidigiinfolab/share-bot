@@ -20,7 +20,7 @@
         "id": "1787722507.119212",
         "stock": "ICICIBANK.NS",
         "date": "2026-08-26 05:35:07",
-        "status": "PENDING",
+        "status": "EXPIRED",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "intraday",
@@ -54,7 +54,7 @@
         "id": "1787722529.82782",
         "stock": "INFY.NS",
         "date": "2026-08-26 05:35:29",
-        "status": "PENDING",
+        "status": "EXPIRED",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -105,7 +105,7 @@
         "id": "1787722635.548304",
         "stock": "ITC.NS",
         "date": "2026-08-26 05:37:15",
-        "status": "PENDING",
+        "status": "EXPIRED",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -139,7 +139,7 @@
         "id": "1787722721.91788",
         "stock": "BAJFINANCE.NS",
         "date": "2026-08-26 05:38:41",
-        "status": "PENDING",
+        "status": "EXPIRED",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",

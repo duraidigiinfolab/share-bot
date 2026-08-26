@@ -120,8 +120,14 @@ def evaluate_signals():
         today = datetime.now().date()
         
         is_expired = False
-        if trade_type == "intraday" and signal_date < today:
-            is_expired = True
+        now = datetime.now()
+        
+        if trade_type == "intraday":
+            # Expire if it's from a previous day, or if it's today but past 15:30 (3:30 PM)
+            if signal_date < today:
+                is_expired = True
+            elif signal_date == today and (now.hour > 15 or (now.hour == 15 and now.minute >= 30)):
+                is_expired = True
             
         # Get current price
         try:
