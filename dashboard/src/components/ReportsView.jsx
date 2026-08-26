@@ -2,13 +2,14 @@ import React from 'react';
 import TradeTable from './TradeTable';
 
 const ReportsView = ({ trades }) => {
-  const completedTrades = trades.filter(t => t.status.startsWith('WIN') || t.status.startsWith('LOSS'));
+  // Any trade that is not PENDING is considered completed.
+  const completedTrades = trades.filter(t => t.status !== 'PENDING');
   
   const intradayTrades = trades.filter(t => t.signal?.type === 'intraday');
   const longTermTrades = trades.filter(t => t.signal?.type === 'long term');
   
   const wins = completedTrades.filter(t => t.status.startsWith('WIN')).length;
-  const losses = completedTrades.filter(t => t.status.startsWith('LOSS')).length;
+  const losses = completedTrades.filter(t => !t.status.startsWith('WIN')).length;
   const total = wins + losses;
   
   const accuracy = total === 0 ? 0 : Math.round((wins / total) * 100);

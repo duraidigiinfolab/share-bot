@@ -80,19 +80,14 @@ const TradeTable = ({ trades, title }) => {
                         PENDING
                       </span>
                     )}
-                    {trade.status.startsWith('WIN') && (
+                    {trade.status !== 'PENDING' && trade.status.startsWith('WIN') && (
                       <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-heading text-[10px] uppercase tracking-wider">
                         WIN
                       </span>
                     )}
-                    {trade.status.startsWith('LOSS') && (
+                    {trade.status !== 'PENDING' && !trade.status.startsWith('WIN') && (
                       <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-error/10 text-error border border-error/20 font-heading text-[10px] uppercase tracking-wider">
                         LOSS
-                      </span>
-                    )}
-                    {trade.status.startsWith('EXPIRED') && (
-                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100 text-slate-500 border border-slate-200 font-heading text-[10px] uppercase tracking-wider">
-                        EXPIRED
                       </span>
                     )}
                   </td>
