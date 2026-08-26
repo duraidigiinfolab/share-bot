@@ -3,6 +3,7 @@ import pandas as pd
 import pandas_ta as ta
 import urllib.request
 import json
+import concurrent.futures
 
 def get_nifty500_tickers():
     """Fetches the Nifty 500 tickers from NSE or falls back to a large hardcoded list."""
@@ -76,53 +77,59 @@ def fetch_stock_data(ticker_symbol, period="6mo", interval="1d"):
         print(f"Error fetching data for {ticker_symbol}: {e}")
         return None
 
+def _screen_single_stock(ticker):
+    """Worker function for screening a single stock."""
+    try:
+        t = yf.Ticker(ticker)
+        df = t.history(period="1mo", interval="1d")
+        
+        if df.empty or len(df) < 20:
+            return None
+            
+        df.ta.rsi(length=14, append=True)
+        df.ta.macd(fast=12, slow=26, signal=9, append=True)
+        
+        latest = df.iloc[-1]
+        prev = df.iloc[-2]
+        
+        rsi = latest.get('RSI_14', 50)
+        macd = latest.get('MACD_12_26_9', 0)
+        macd_signal = latest.get('MACDs_12_26_9', 0)
+        prev_macd = prev.get('MACD_12_26_9', 0)
+        prev_signal = prev.get('MACDs_12_26_9', 0)
+        
+        rsi_interesting = rsi < 35 or rsi > 65
+        macd_bullish_cross = prev_macd <= prev_signal and macd > macd_signal
+        macd_bearish_cross = prev_macd >= prev_signal and macd < macd_signal
+        
+        if rsi_interesting or macd_bullish_cross or macd_bearish_cross:
+            return ticker
+    except:
+        return None
+    return None
+
 def screen_stocks(tickers):
     """
     Runs a fast pre-screening on all tickers using basic technical analysis.
-    Returns a list of high-probability tickers for the AI to analyze deeply.
+    Uses ThreadPoolExecutor for massive speedup.
     """
-    print(f"Pre-screening {len(tickers)} stocks...")
+    print(f"Pre-screening {len(tickers)} stocks with 20 parallel threads...")
     high_prob_tickers = []
     
-    # Process in batches to avoid overwhelming the system
-    for i, ticker in enumerate(tickers):
-        if i > 0 and i % 50 == 0:
-            print(f"Screened {i}/{len(tickers)} stocks...")
-            
-        try:
-            # Fetch minimal data for fast screening
-            t = yf.Ticker(ticker)
-            df = t.history(period="1mo", interval="1d")
-            
-            if df.empty or len(df) < 20:
-                continue
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+        # Submit all tasks and track completion progress
+        futures = {executor.submit(_screen_single_stock, t): t for t in tickers}
+        completed = 0
+        
+        for future in concurrent.futures.as_completed(futures):
+            completed += 1
+            if completed % 50 == 0:
+                print(f"Screened {completed}/{len(tickers)} stocks...")
                 
-            # Basic Indicators
-            df.ta.rsi(length=14, append=True)
-            df.ta.macd(fast=12, slow=26, signal=9, append=True)
-            
-            latest = df.iloc[-1]
-            prev = df.iloc[-2]
-            
-            rsi = latest.get('RSI_14', 50)
-            macd = latest.get('MACD_12_26_9', 0)
-            macd_signal = latest.get('MACDs_12_26_9', 0)
-            prev_macd = prev.get('MACD_12_26_9', 0)
-            prev_signal = prev.get('MACDs_12_26_9', 0)
-            
-            # Condition 1: Oversold (RSI < 35) or Overbought (RSI > 65)
-            rsi_interesting = rsi < 35 or rsi > 65
-            
-            # Condition 2: MACD Crossover (Bullish or Bearish)
-            macd_bullish_cross = prev_macd <= prev_signal and macd > macd_signal
-            macd_bearish_cross = prev_macd >= prev_signal and macd < macd_signal
-            
-            if rsi_interesting or macd_bullish_cross or macd_bearish_cross:
-                high_prob_tickers.append(ticker)
+            result = future.result()
+            if result:
+                high_prob_tickers.append(result)
                 
-        except Exception as e:
-            continue
-            
     print(f"Screening complete. Found {len(high_prob_tickers)} high-probability stocks.")
     return high_prob_tickers
 
@@ -137,42 +144,44 @@ def get_latest_news(ticker_symbol):
         return []
 
 def format_data_for_ai(stock_data, headlines):
-    """Formats the latest stock data into a concise text block for the AI."""
+    """Formats the last 10 days of stock data into a concise text block for the AI."""
     df = stock_data['df']
     latest = df.iloc[-1]
-    prev = df.iloc[-2]
     
-    # Extract latest indicator values
-    rsi = round(latest.get('RSI_14', 0), 2)
-    macd = round(latest.get('MACD_12_26_9', 0), 2)
-    macd_signal = round(latest.get('MACDs_12_26_9', 0), 2)
-    sma_20 = round(latest.get('SMA_20', 0), 2)
-    sma_50 = round(latest.get('SMA_50', 0), 2)
-    sma_200 = round(latest.get('SMA_200', 0), 2)
+    # Extract latest indicator values for quick reference
     atr = round(latest.get('ATRr_14', 0), 2)
     bb_lower = round(latest.get('BBL_20_2.0', 0), 2)
     bb_upper = round(latest.get('BBU_20_2.0', 0), 2)
+    sma_20 = round(latest.get('SMA_20', 0), 2)
+    sma_50 = round(latest.get('SMA_50', 0), 2)
+    sma_200 = round(latest.get('SMA_200', 0), 2)
     
-    close_price = round(latest['Close'], 2)
-    open_price = round(latest['Open'], 2)
-    volume = latest['Volume']
+    # Format the 10-day history table
+    last_10 = df.tail(10)
+    history_table = "Date       | Close   | High    | Low     | Volume     | RSI   | MACD\n"
+    history_table += "-" * 70 + "\n"
+    
+    for date, row in last_10.iterrows():
+        d_str = date.strftime('%Y-%m-%d')
+        c = f"{round(row['Close'], 2):.2f}"
+        h = f"{round(row['High'], 2):.2f}"
+        l = f"{round(row['Low'], 2):.2f}"
+        v = str(int(row['Volume']))
+        rsi = f"{round(row.get('RSI_14', 0), 2):.2f}"
+        macd = f"{round(row.get('MACD_12_26_9', 0), 2):.2f}"
+        history_table += f"{d_str} | {c.ljust(7)} | {h.ljust(7)} | {l.ljust(7)} | {v.ljust(10)} | {rsi.ljust(5)} | {macd}\n"
     
     summary = f"""
 Stock: {stock_data['symbol']}
 Timeframe: {stock_data.get('interval', '1d')}
-Day Open Price: {open_price}
-Current Price: {close_price}
-Previous Price: {round(prev['Close'], 2)}
-Volume: {volume}
 
-Technical Indicators:
-- Volatility (ATR 14): {atr}
-- RSI (14): {rsi}
-- MACD (12, 26): {macd} (Signal: {macd_signal})
+--- 10-Day Historical Trend ---
+{history_table}
+
+Additional Technical Context:
+- Current Volatility (ATR 14): {atr}
 - Bollinger Bands (20): Lower {bb_lower}, Upper {bb_upper}
-- SMA 20: {sma_20}
-- SMA 50: {sma_50}
-- SMA 200: {sma_200}
+- Moving Averages: SMA 20 ({sma_20}), SMA 50 ({sma_50}), SMA 200 ({sma_200})
 """
     if stock_data.get('info'):
         info = stock_data['info']

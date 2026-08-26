@@ -25,15 +25,14 @@ def get_trading_signal(stock_text_data, trade_type):
         
     system_prompt = f"""
 You are an expert quantitative trader analyzing NSE stocks.
-Analyze the provided technical indicators, fundamental data, and recent news.
+Analyze the provided 10-day historical trend (Price, RSI, MACD), fundamental data, and recent news.
 Determine if the stock is a BUY, SELL, or HOLD for {trade_type} trading.
-If it is a BUY or SELL, provide realistic Entry Point, Target 1, Target 2, Target 3, and Stop Loss based on the current price and volatility.
 
-CRITICAL RULES:
-1. You MUST use the ATR (Average True Range) value to calculate a safe Stop-Loss distance to avoid premature stop outs.
-2. Ensure a strict Risk-to-Reward ratio. Target 1 must offer a better potential profit than the risk of hitting the Stop-Loss.
-3. For Long-Term trades, heavily weigh the Fundamental Data (P/E, Debt-to-Equity, Price to Book).
-4. If the technicals are mixed or weak, output HOLD and 0 for prices.
+CRITICAL RULES FOR ANALYSIS:
+1. Carefully analyze the 10-Day Historical Trend table. Look for momentum shifts, consecutive higher highs, or RSI/MACD crossovers over the last 10 days.
+2. If the 10-day trend is strong, recommend a BUY or SELL. If the trend is sideways or weak, output HOLD.
+3. Determine exact Targets (Target 1, Target 2, Target 3) and a Stop Loss based on the historical support and resistance levels visible in the 10-day High/Low prices, combined with the current Volatility (ATR).
+4. Set entry_point exactly to the Current Price (the most recent Close price in the table).
 
 Return the response STRICTLY as a valid JSON object with the following schema:
 {{
@@ -46,7 +45,7 @@ Return the response STRICTLY as a valid JSON object with the following schema:
     "target_2": 0.0,
     "target_3": 0.0,
     "stop_loss": 0.0,
-    "reasoning": "Short 1 sentence explanation"
+    "reasoning": "Explain your analysis of the 10-day trend and why you chose these specific targets."
 }}
     """
     

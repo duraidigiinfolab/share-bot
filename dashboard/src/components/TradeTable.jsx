@@ -32,9 +32,9 @@ const TradeTable = ({ trades, title }) => {
               <th className="px-4 py-3 font-medium">Action</th>
               <th className="px-4 py-3 font-medium">Status</th>
               <th className="px-4 py-3 font-medium">Entry</th>
-              <th className="px-4 py-3 font-medium">Target 1</th>
+              <th className="px-4 py-3 font-medium">Target</th>
               <th className="px-4 py-3 font-medium">Stop Loss</th>
-              <th className="px-4 py-3 font-medium">P&L</th>
+              <th className="px-4 py-3 font-medium">Achieved P&L</th>
             </tr>
           </thead>
           <tbody className="font-mono text-sm">
@@ -42,10 +42,49 @@ const TradeTable = ({ trades, title }) => {
               const signal = trade.signal || {};
               const isBuy = signal.buy_or_sell === 'BUY';
               
-              let expectedPnL = 0;
-              if (signal.entry_point > 0 && signal.target_1 > 0) {
-                const diff = Math.abs(signal.target_1 - signal.entry_point);
-                expectedPnL = ((diff / signal.entry_point) * 100).toFixed(2);
+              let hitTarget = 'T1';
+              let targetValue = signal.target_1;
+              let achievedPnL = 0;
+
+              if (trade.status !== 'PENDING') {
+                if (trade.status.startsWith('WIN')) {
+                  // Figure out hit target from old string format or use T1
+                  if (trade.status.includes('Target 3')) {
+                    hitTarget = 'T3';
+                    targetValue = signal.target_3;
+                  } else if (trade.status.includes('Target 2')) {
+                    hitTarget = 'T2';
+                    targetValue = signal.target_2;
+                  }
+                  
+                  // If actual_pnl exists, we can accurately deduce which target was hit
+                  if (trade.actual_pnl !== undefined) {
+                    const t2PnL = (Math.abs(signal.target_2 - signal.entry_point) / signal.entry_point) * 100;
+                    const t3PnL = (Math.abs(signal.target_3 - signal.entry_point) / signal.entry_point) * 100;
+                    
+                    if (trade.actual_pnl >= t3PnL) {
+                      hitTarget = 'T3';
+                      targetValue = signal.target_3;
+                    } else if (trade.actual_pnl >= t2PnL) {
+                      hitTarget = 'T2';
+                      targetValue = signal.target_2;
+                    } else {
+                      hitTarget = 'T1';
+                      targetValue = signal.target_1;
+                    }
+                  }
+                  
+                  // Calculate achieved PnL (use actual_pnl if available, else fallback to target math)
+                  achievedPnL = trade.actual_pnl !== undefined 
+                    ? trade.actual_pnl 
+                    : (Math.abs(targetValue - signal.entry_point) / signal.entry_point) * 100;
+                    
+                } else {
+                  // LOSS
+                  achievedPnL = trade.actual_pnl !== undefined
+                    ? trade.actual_pnl
+                    : -((Math.abs(signal.stop_loss - signal.entry_point) / signal.entry_point) * 100);
+                }
               }
               
               const symbol = trade.stock.replace('.NS', '');
@@ -92,10 +131,17 @@ const TradeTable = ({ trades, title }) => {
                     )}
                   </td>
                   <td className="px-4 py-3 text-on-surface font-bold">₹{signal.entry_point}</td>
-                  <td className="px-4 py-3 text-on-surface">₹{signal.target_1}</td>
+                  <td className="px-4 py-3 text-on-surface">
+                    <div>₹{targetValue}</div>
+                    {trade.status !== 'PENDING' && trade.status.startsWith('WIN') ? (
+                      <div className="text-[10px] text-primary mt-0.5">{hitTarget} Hit</div>
+                    ) : (
+                      <div className="text-[10px] text-on-surface-variant mt-0.5">T1</div>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-error font-bold">₹{signal.stop_loss}</td>
-                  <td className={`px-4 py-3 font-bold ${trade.actual_pnl !== undefined ? (trade.actual_pnl > 0 ? 'text-primary' : 'text-error') : 'text-on-surface-variant'}`}>
-                    {trade.actual_pnl !== undefined ? `${trade.actual_pnl > 0 ? '+' : ''}${trade.actual_pnl}%` : `(Exp: +${expectedPnL}%)`}
+                  <td className={`px-4 py-3 font-bold ${trade.status === 'PENDING' ? 'text-on-surface-variant' : (achievedPnL > 0 ? 'text-primary' : 'text-error')}`}>
+                    {trade.status === 'PENDING' ? '-' : `${achievedPnL > 0 ? '+' : ''}${achievedPnL.toFixed(2)}%`}
                   </td>
                 </tr>
               );

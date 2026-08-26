@@ -20,7 +20,13 @@ function App() {
         const sortedTrades = (Array.isArray(jsonData) ? jsonData : []).sort((a, b) => {
           return new Date(b.date) - new Date(a.date);
         });
-        setData({ trades: sortedTrades, last_updated: new Date().toLocaleString() });
+        
+        let lastUpdatedStr = 'Unknown';
+        if (sortedTrades.length > 0) {
+          lastUpdatedStr = new Date(sortedTrades[0].date).toLocaleString();
+        }
+        
+        setData({ trades: sortedTrades, last_updated: lastUpdatedStr });
         setLoading(false);
       })
       .catch((err) => {
