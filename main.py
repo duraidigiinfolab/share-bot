@@ -42,7 +42,31 @@ def is_market_open_today():
     today = datetime.datetime.now()
     if today.weekday() >= 5: # 5=Sat, 6=Sun
         return False
-    # TODO: Add NSE holiday calendar check here
+        
+    # NSE 2026 Trading Holidays
+    nse_holidays_2026 = [
+        "2026-01-26", # Republic Day
+        "2026-03-03", # Holi
+        "2026-03-26", # Shri Ram Navami
+        "2026-03-31", # Mahavir Jayanti
+        "2026-04-03", # Good Friday
+        "2026-04-14", # Dr. Ambedkar Jayanti
+        "2026-05-01", # Maharashtra Day
+        "2026-05-28", # Bakri Id
+        "2026-06-26", # Muharram
+        "2026-09-14", # Ganesh Chaturthi
+        "2026-10-02", # Mahatma Gandhi Jayanti
+        "2026-10-20", # Dussehra
+        "2026-11-10", # Diwali-Balipratipada
+        "2026-11-24", # Prakash Gurpurb
+        "2026-12-25"  # Christmas
+    ]
+    
+    today_str = today.strftime("%Y-%m-%d")
+    if today_str in nse_holidays_2026:
+        print(f"Market is closed today for a public holiday: {today_str}")
+        return False
+        
     return True
 
 def run_morning_analysis():
