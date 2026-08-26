@@ -2,7 +2,6 @@ import React from 'react';
 import TradeTable from './TradeTable';
 
 const ReportsView = ({ trades }) => {
-  // Only process completed trades for the report
   const completedTrades = trades.filter(t => t.status === 'WIN' || t.status === 'LOSS');
   
   const intradayTrades = trades.filter(t => t.signal?.type === 'intraday');
@@ -14,8 +13,6 @@ const ReportsView = ({ trades }) => {
   
   const accuracy = total === 0 ? 0 : Math.round((wins / total) * 100);
   
-  // Estimate Net P&L%
-  // Assuming WIN = Target 1 hit, LOSS = Stop Loss hit
   let estimatedPnL = 0;
   
   completedTrades.forEach(trade => {
@@ -35,34 +32,42 @@ const ReportsView = ({ trades }) => {
   });
 
   return (
-    <div className="reports-view">
-      <div className="analytics-cards">
-        <div className="analytics-card">
-          <div className="analytics-title">Total Completed Trades</div>
-          <div className="analytics-value">{total}</div>
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="glass-panel rounded-xl p-6 flex flex-col justify-between h-32 relative overflow-hidden">
+          <div className="flex justify-between items-start">
+            <span className="font-heading text-xs text-on-surface-variant uppercase tracking-wider">Total Completed Trades</span>
+            <span className="material-symbols-outlined text-on-surface-variant text-sm">history</span>
+          </div>
+          <div className="font-mono text-3xl font-bold text-on-surface">{total}</div>
         </div>
-        <div className="analytics-card">
-          <div className="analytics-title">Bot Accuracy (Win Rate)</div>
-          <div className="analytics-value" style={{ color: accuracy >= 50 ? 'var(--accent-green)' : 'var(--accent-red)' }}>
+        
+        <div className="glass-panel rounded-xl p-6 flex flex-col justify-between h-32 relative overflow-hidden">
+          <div className="flex justify-between items-start">
+            <span className="font-heading text-xs text-on-surface-variant uppercase tracking-wider">Bot Accuracy (Win Rate)</span>
+            <span className="material-symbols-outlined text-on-surface-variant text-sm">psychology</span>
+          </div>
+          <div className={`font-mono text-3xl font-bold ${accuracy >= 50 ? 'text-primary' : 'text-error'}`}>
             {accuracy}%
           </div>
-          <div className="analytics-subtitle">{wins} Wins / {losses} Losses</div>
+          <div className="font-heading text-[10px] text-on-surface-variant uppercase">{wins} Wins / {losses} Losses</div>
         </div>
-        <div className="analytics-card">
-          <div className="analytics-title">Estimated Net P&L</div>
-          <div className="analytics-value" style={{ color: estimatedPnL >= 0 ? 'var(--accent-green)' : 'var(--accent-red)' }}>
+
+        <div className="glass-panel rounded-xl p-6 flex flex-col justify-between h-32 relative overflow-hidden">
+          <div className="flex justify-between items-start">
+            <span className="font-heading text-xs text-on-surface-variant uppercase tracking-wider">Estimated Net P&L</span>
+            <span className="material-symbols-outlined text-on-surface-variant text-sm">account_balance</span>
+          </div>
+          <div className={`font-mono text-3xl font-bold ${estimatedPnL >= 0 ? 'text-primary' : 'text-error'}`}>
             {estimatedPnL >= 0 ? '+' : ''}{estimatedPnL.toFixed(2)}%
           </div>
-          <div className="analytics-subtitle">Based on hitting Target 1 or Stop Loss</div>
+          <div className="font-heading text-[10px] text-on-surface-variant uppercase">Based on hitting Target 1 or Stop Loss</div>
         </div>
       </div>
 
-      <section style={{ marginTop: '3rem' }}>
-        <h2 className="section-title">
-          <span style={{ color: 'var(--text-primary)' }}>📊</span> Trade History Log
-        </h2>
+      <section>
         {trades.length === 0 ? (
-          <div className="empty-state">No trades available yet.</div>
+          <div className="glass-panel text-center p-12 text-on-surface-variant rounded-xl border-dashed border-slate-200">No trades available yet.</div>
         ) : (
           <>
             <TradeTable trades={intradayTrades} title="Intraday History" />
