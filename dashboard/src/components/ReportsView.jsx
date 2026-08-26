@@ -16,9 +16,9 @@ const ReportsView = ({ trades }) => {
   let estimatedPnL = 0;
   
   completedTrades.forEach(trade => {
-    const entry = parseFloat(trade.signal?.entry_price || 0);
+    const entry = parseFloat(trade.signal?.entry_point || 0);
     const stopLoss = parseFloat(trade.signal?.stop_loss || 0);
-    const target1 = parseFloat(trade.signal?.targets?.target_1 || 0);
+    const target1 = parseFloat(trade.signal?.target_1 || 0);
     const isBuy = trade.signal?.buy_or_sell === 'BUY';
     
     if (entry > 0) {

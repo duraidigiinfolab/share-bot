@@ -21,7 +21,7 @@ const TradeCard = ({ trade }) => {
       <div className="price-grid">
         <div className="price-item">
           <span className="price-label">Entry Price</span>
-          <span className="price-value">₹{signal.entry_price}</span>
+          <span className="price-value">₹{signal.entry_point}</span>
         </div>
         <div className="price-item">
           <span className="price-label">Stop Loss</span>
@@ -32,9 +32,9 @@ const TradeCard = ({ trade }) => {
       <div className="targets">
         <span className="price-label">Targets</span>
         <div className="targets-list">
-          <span className="target-pill">T1: ₹{signal.targets?.target_1}</span>
-          <span className="target-pill">T2: ₹{signal.targets?.target_2}</span>
-          <span className="target-pill">T3: ₹{signal.targets?.target_3}</span>
+          <span className="target-pill">T1: ₹{signal.target_1}</span>
+          <span className="target-pill">T2: ₹{signal.target_2}</span>
+          <span className="target-pill">T3: ₹{signal.target_3}</span>
         </div>
       </div>
       
