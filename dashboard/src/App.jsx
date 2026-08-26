@@ -17,11 +17,11 @@ function App() {
         return res.json();
       })
       .then((jsonData) => {
-        // Sort trades by date (newest first)
-        const sortedTrades = (jsonData.trades || []).sort((a, b) => {
+        // jsonData is an array of trades
+        const sortedTrades = (Array.isArray(jsonData) ? jsonData : []).sort((a, b) => {
           return new Date(b.date) - new Date(a.date);
         });
-        setData({ ...jsonData, trades: sortedTrades });
+        setData({ trades: sortedTrades, last_updated: new Date().toLocaleString() });
         setLoading(false);
       })
       .catch((err) => {
@@ -46,13 +46,13 @@ function App() {
 
         <div className="tabs">
           <button 
-            className={`tab-btn ${activeTab === 'active' ? 'active' : ''}`}
+            className={`tab ${activeTab === 'active' ? 'active' : ''}`}
             onClick={() => setActiveTab('active')}
           >
             Active Setups
           </button>
           <button 
-            className={`tab-btn ${activeTab === 'reports' ? 'active' : ''}`}
+            className={`tab ${activeTab === 'reports' ? 'active' : ''}`}
             onClick={() => setActiveTab('reports')}
           >
             Analytics & Reports
