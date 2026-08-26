@@ -13,21 +13,11 @@ const ReportsView = ({ trades }) => {
   
   const accuracy = total === 0 ? 0 : Math.round((wins / total) * 100);
   
-  let estimatedPnL = 0;
+  let actualPnL = 0;
   
   completedTrades.forEach(trade => {
-    const entry = parseFloat(trade.signal?.entry_point || 0);
-    const stopLoss = parseFloat(trade.signal?.stop_loss || 0);
-    const target1 = parseFloat(trade.signal?.target_1 || 0);
-    
-    if (entry > 0) {
-      if (trade.status === 'WIN' && target1 > 0) {
-        const diff = Math.abs(target1 - entry);
-        estimatedPnL += (diff / entry) * 100;
-      } else if (trade.status === 'LOSS' && stopLoss > 0) {
-        const diff = Math.abs(entry - stopLoss);
-        estimatedPnL -= (diff / entry) * 100;
-      }
+    if (trade.actual_pnl !== undefined) {
+      actualPnL += trade.actual_pnl;
     }
   });
 
@@ -55,13 +45,13 @@ const ReportsView = ({ trades }) => {
 
         <div className="glass-panel rounded-xl p-6 flex flex-col justify-between h-32 relative overflow-hidden">
           <div className="flex justify-between items-start">
-            <span className="font-heading text-xs text-on-surface-variant uppercase tracking-wider">Estimated Net P&L</span>
+            <span className="font-heading text-xs text-on-surface-variant uppercase tracking-wider">Actual Net P&L</span>
             <span className="material-symbols-outlined text-on-surface-variant text-sm">account_balance</span>
           </div>
-          <div className={`font-mono text-3xl font-bold ${estimatedPnL >= 0 ? 'text-primary' : 'text-error'}`}>
-            {estimatedPnL >= 0 ? '+' : ''}{estimatedPnL.toFixed(2)}%
+          <div className={`font-mono text-3xl font-bold ${actualPnL >= 0 ? 'text-primary' : 'text-error'}`}>
+            {actualPnL >= 0 ? '+' : ''}{actualPnL.toFixed(2)}%
           </div>
-          <div className="font-heading text-[10px] text-on-surface-variant uppercase">Based on hitting Target 1 or Stop Loss</div>
+          <div className="font-heading text-[10px] text-on-surface-variant uppercase">Based on closed trades</div>
         </div>
       </div>
 

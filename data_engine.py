@@ -4,14 +4,33 @@ import pandas_ta as ta
 import urllib.request
 import json
 
-def get_nifty50_tickers():
-    """Returns a sample list of top NSE tickers for analysis."""
-    # NIFTY 50 Sample
-    tickers = [
+def get_nifty500_tickers():
+    """Fetches the Nifty 500 tickers from NSE or falls back to a large hardcoded list."""
+    try:
+        url = "https://archives.nseindia.com/content/indices/ind_nifty500list.csv"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response:
+            df = pd.read_csv(response)
+            tickers = [str(sym) + ".NS" for sym in df['Symbol'].tolist()]
+            if tickers:
+                return tickers
+    except Exception as e:
+        print(f"Error fetching Nifty 500: {e}. Falling back to top 50.")
+        pass
+        
+    # Fallback Top 50
+    return [
         "RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "ICICIBANK.NS", "INFY.NS",
-        "SBIN.NS", "BHARTIARTL.NS", "ITC.NS", "LT.NS", "BAJFINANCE.NS"
+        "SBIN.NS", "BHARTIARTL.NS", "ITC.NS", "LT.NS", "BAJFINANCE.NS",
+        "HINDUNILVR.NS", "KOTAKBANK.NS", "AXISBANK.NS", "ASIANPAINT.NS", "MARUTI.NS",
+        "TITAN.NS", "SUNPHARMA.NS", "BAJAJFINSV.NS", "ULTRACEMCO.NS", "TATASTEEL.NS",
+        "NTPC.NS", "POWERGRID.NS", "TATAMOTORS.NS", "M&M.NS", "NESTLEIND.NS",
+        "WIPRO.NS", "TECHM.NS", "HCLTECH.NS", "ONGC.NS", "ADANIENT.NS",
+        "GRASIM.NS", "HINDALCO.NS", "JSWSTEEL.NS", "COALINDIA.NS", "TATASTLLP.NS",
+        "INDUSINDBK.NS", "CIPLA.NS", "BRITANNIA.NS", "APOLLOHOSP.NS", "EICHERMOT.NS",
+        "DIVISLAB.NS", "TATACONSUM.NS", "BAJAJ-AUTO.NS", "HEROMOTOCO.NS", "DRREDDY.NS",
+        "SHREECEM.NS", "BPCL.NS", "UPL.NS", "HDFCLIFE.NS", "SBILIFE.NS"
     ]
-    return tickers
 
 def fetch_stock_data(ticker_symbol, period="6mo", interval="1d"):
     """Fetches historical data and calculates technical indicators."""
@@ -56,6 +75,56 @@ def fetch_stock_data(ticker_symbol, period="6mo", interval="1d"):
     except Exception as e:
         print(f"Error fetching data for {ticker_symbol}: {e}")
         return None
+
+def screen_stocks(tickers):
+    """
+    Runs a fast pre-screening on all tickers using basic technical analysis.
+    Returns a list of high-probability tickers for the AI to analyze deeply.
+    """
+    print(f"Pre-screening {len(tickers)} stocks...")
+    high_prob_tickers = []
+    
+    # Process in batches to avoid overwhelming the system
+    for i, ticker in enumerate(tickers):
+        if i > 0 and i % 50 == 0:
+            print(f"Screened {i}/{len(tickers)} stocks...")
+            
+        try:
+            # Fetch minimal data for fast screening
+            t = yf.Ticker(ticker)
+            df = t.history(period="1mo", interval="1d")
+            
+            if df.empty or len(df) < 20:
+                continue
+                
+            # Basic Indicators
+            df.ta.rsi(length=14, append=True)
+            df.ta.macd(fast=12, slow=26, signal=9, append=True)
+            
+            latest = df.iloc[-1]
+            prev = df.iloc[-2]
+            
+            rsi = latest.get('RSI_14', 50)
+            macd = latest.get('MACD_12_26_9', 0)
+            macd_signal = latest.get('MACDs_12_26_9', 0)
+            prev_macd = prev.get('MACD_12_26_9', 0)
+            prev_signal = prev.get('MACDs_12_26_9', 0)
+            
+            # Condition 1: Oversold (RSI < 35) or Overbought (RSI > 65)
+            rsi_interesting = rsi < 35 or rsi > 65
+            
+            # Condition 2: MACD Crossover (Bullish or Bearish)
+            macd_bullish_cross = prev_macd <= prev_signal and macd > macd_signal
+            macd_bearish_cross = prev_macd >= prev_signal and macd < macd_signal
+            
+            if rsi_interesting or macd_bullish_cross or macd_bearish_cross:
+                high_prob_tickers.append(ticker)
+                
+        except Exception as e:
+            continue
+            
+    print(f"Screening complete. Found {len(high_prob_tickers)} high-probability stocks.")
+    return high_prob_tickers
 
 def get_latest_news(ticker_symbol):
     """Fetches recent news titles for the stock using yfinance."""

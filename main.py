@@ -87,22 +87,22 @@ def run_morning_analysis():
     )
     send_telegram(msg)
     
-    # Get current counts
-    intraday_count = tracker.get_signal_count("intraday", "today")
-    longterm_count = tracker.get_signal_count("long term", "this_week")
+    # Get Nifty 500 and run through Python Pre-Screener
+    tickers = data_engine.get_nifty500_tickers()
+    filtered_tickers = data_engine.screen_stocks(tickers)
     
-    tickers = data_engine.get_nifty50_tickers()
+    if not filtered_tickers:
+        send_telegram("No high-probability setups found by the screener today.")
+        return
+        
+    send_telegram(f"🔍 Pre-screener found {len(filtered_tickers)} high-probability stocks out of {len(tickers)}. Passing to AI for deep analysis...")
     
-    for ticker in tickers:
-        # Check if we hit both limits
-        if intraday_count >= 5 and longterm_count >= 2:
-            print("All signal quotas met. Stopping analysis.")
-            break
-            
+    for ticker in filtered_tickers:
         news = data_engine.get_latest_news(ticker)
         
-        run_intra = intraday_count < 5
-        run_long = longterm_count < 2
+        # We run both bots for every filtered stock
+        run_intra = True
+        run_long = True
         
         intraday_prompt = None
         longterm_prompt = None
@@ -126,13 +126,11 @@ def run_morning_analysis():
         if intraday and intraday.get("buy_or_sell") in ["BUY", "SELL"]:
             tracker.add_signal(ticker, intraday)
             send_telegram(format_signal_message(ticker, intraday))
-            intraday_count += 1
             
         # Process Long Term
         if longterm and longterm.get("buy_or_sell") in ["BUY", "SELL"]:
             tracker.add_signal(ticker, longterm)
             send_telegram(format_signal_message(ticker, longterm))
-            longterm_count += 1
             
         # Sleep to avoid hitting Gemini API rate limits
         time.sleep(2)

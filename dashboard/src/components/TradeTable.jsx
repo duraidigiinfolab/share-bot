@@ -34,7 +34,7 @@ const TradeTable = ({ trades, title }) => {
               <th className="px-4 py-3 font-medium">Entry</th>
               <th className="px-4 py-3 font-medium">Target 1</th>
               <th className="px-4 py-3 font-medium">Stop Loss</th>
-              <th className="px-4 py-3 font-medium">Exp. P&L</th>
+              <th className="px-4 py-3 font-medium">P&L</th>
             </tr>
           </thead>
           <tbody className="font-mono text-sm">
@@ -87,14 +87,13 @@ const TradeTable = ({ trades, title }) => {
                     )}
                     {trade.status === 'LOSS' && (
                       <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-error/10 text-error border border-error/20 font-heading text-[10px] uppercase tracking-wider">
-                        LOSS
-                      </span>
-                    )}
                   </td>
                   <td className="px-4 py-3 text-on-surface font-bold">₹{signal.entry_point}</td>
                   <td className="px-4 py-3 text-on-surface">₹{signal.target_1}</td>
                   <td className="px-4 py-3 text-error font-bold">₹{signal.stop_loss}</td>
-                  <td className="px-4 py-3 text-primary font-bold">+{expectedPnL}%</td>
+                  <td className={`px-4 py-3 font-bold ${trade.actual_pnl !== undefined ? (trade.actual_pnl > 0 ? 'text-primary' : 'text-error') : 'text-on-surface-variant'}`}>
+                    {trade.actual_pnl !== undefined ? `${trade.actual_pnl > 0 ? '+' : ''}${trade.actual_pnl}%` : `(Exp: +${expectedPnL}%)`}
+                  </td>
                 </tr>
               );
             })}

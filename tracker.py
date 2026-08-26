@@ -115,20 +115,10 @@ def evaluate_signals():
         trade_type = signal["type"]
         date_str = entry["date"]
         
-        # Check if Intraday expired
         signal_date = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").date()
         today = datetime.now().date()
-        
-        is_expired = False
         now = datetime.now()
         
-        if trade_type == "intraday":
-            # Expire if it's from a previous day, or if it's today but past 15:30 (3:30 PM)
-            if signal_date < today:
-                is_expired = True
-            elif signal_date == today and (now.hour > 15 or (now.hour == 15 and now.minute >= 30)):
-                is_expired = True
-            
         # Get current price
         try:
             ticker = yf.Ticker(stock)
@@ -143,33 +133,50 @@ def evaluate_signals():
         t3 = signal["target_3"]
         entry_price = signal["entry_point"]
         
+        # Time Expiration Logic
+        is_expired = False
+        if trade_type == "intraday":
+            if signal_date < today:
+                is_expired = True
+            elif signal_date == today and (now.hour > 15 or (now.hour == 15 and now.minute >= 30)):
+                is_expired = True
+        elif trade_type == "long term":
+            # Default to closing after 90 days if target not hit
+            if (today - signal_date).days > 90:
+                is_expired = True
+                
+        # Target/SL Hit Logic
         hit_status = None
-        
         if buy_sell == "BUY":
             if current_price <= sl:
-                hit_status = "LOSS (Stop Loss Hit)"
-            elif current_price >= t3:
-                hit_status = "WIN (Target 3 Hit!)"
-            elif current_price >= t2:
-                hit_status = "WIN (Target 2 Hit!)"
+                hit_status = "LOSS"
             elif current_price >= t1:
-                hit_status = "WIN (Target 1 Hit!)"
+                hit_status = "WIN"
         elif buy_sell == "SELL":
             if current_price >= sl:
-                hit_status = "LOSS (Stop Loss Hit)"
-            elif current_price <= t3:
-                hit_status = "WIN (Target 3 Hit!)"
-            elif current_price <= t2:
-                hit_status = "WIN (Target 2 Hit!)"
+                hit_status = "LOSS"
             elif current_price <= t1:
-                hit_status = "WIN (Target 1 Hit!)"
+                hit_status = "WIN"
                 
-        if hit_status:
-            entry["status"] = hit_status
-            reports.append(f"✅ Trade Closed: {stock} ({trade_type}) - Result: {hit_status}")
-        elif is_expired:
-            entry["status"] = "EXPIRED"
-            reports.append(f"⏱️ Trade Expired: {stock} ({trade_type}) did not hit targets today.")
+        # Calculate Actual P&L
+        actual_pnl = 0
+        if buy_sell == "BUY":
+            actual_pnl = ((current_price - entry_price) / entry_price) * 100
+        elif buy_sell == "SELL":
+            actual_pnl = ((entry_price - current_price) / entry_price) * 100
+            
+        # Determine Final Status
+        if hit_status or is_expired:
+            final_status = hit_status
+            if is_expired and not hit_status:
+                # If time expired, decide win/loss based on whether P&L is positive
+                final_status = "WIN" if actual_pnl > 0 else "LOSS"
+                
+            entry["status"] = final_status
+            entry["actual_pnl"] = round(actual_pnl, 2)
+            
+            reason = "Target/SL Hit" if hit_status else "Time Expired"
+            reports.append(f"✅ Trade Closed: {stock} ({trade_type}) - Result: {final_status} ({round(actual_pnl, 2)}%) [{reason}]")
             
     save_tracker(data)
     return reports
