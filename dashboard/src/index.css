@@ -307,3 +307,37 @@ h1 {
   color: var(--text-secondary);
   font-size: 0.9rem;
 }
+
+/* Table Styles */
+.trade-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.trade-table th, .trade-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.trade-table th {
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.trade-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.trade-table tr:last-child td {
+  border-bottom: none;
+}

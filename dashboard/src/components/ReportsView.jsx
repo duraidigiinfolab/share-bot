@@ -1,9 +1,12 @@
 import React from 'react';
-import TradeCard from './TradeCard';
+import TradeTable from './TradeTable';
 
 const ReportsView = ({ trades }) => {
   // Only process completed trades for the report
   const completedTrades = trades.filter(t => t.status === 'WIN' || t.status === 'LOSS');
+  
+  const intradayTrades = completedTrades.filter(t => t.signal?.type === 'intraday');
+  const longTermTrades = completedTrades.filter(t => t.signal?.type === 'long term');
   
   const wins = completedTrades.filter(t => t.status === 'WIN').length;
   const losses = completedTrades.filter(t => t.status === 'LOSS').length;
@@ -19,7 +22,6 @@ const ReportsView = ({ trades }) => {
     const entry = parseFloat(trade.signal?.entry_point || 0);
     const stopLoss = parseFloat(trade.signal?.stop_loss || 0);
     const target1 = parseFloat(trade.signal?.target_1 || 0);
-    const isBuy = trade.signal?.buy_or_sell === 'BUY';
     
     if (entry > 0) {
       if (trade.status === 'WIN' && target1 > 0) {
@@ -62,11 +64,10 @@ const ReportsView = ({ trades }) => {
         {completedTrades.length === 0 ? (
           <div className="empty-state">No completed trades available yet.</div>
         ) : (
-          <div className="dashboard-grid">
-            {completedTrades.map((trade, index) => (
-              <TradeCard key={`report-${index}`} trade={trade} />
-            ))}
-          </div>
+          <>
+            <TradeTable trades={intradayTrades} title="Intraday History" />
+            <TradeTable trades={longTermTrades} title="Investment History" />
+          </>
         )}
       </section>
     </div>
