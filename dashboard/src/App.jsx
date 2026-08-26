@@ -67,6 +67,23 @@ function App() {
           <div className="tab-content">
             {activeTab === 'active' ? (
               <>
+                <div className="analytics-cards">
+                  <div className="analytics-card">
+                    <div className="analytics-title">Total Active Signals</div>
+                    <div className="analytics-value">{pendingTrades.length}</div>
+                  </div>
+                  <div className="analytics-card">
+                    <div className="analytics-title">Active Intraday</div>
+                    <div className="analytics-value" style={{ color: 'var(--accent-blue)' }}>{intradayTrades.length}</div>
+                    <div className="analytics-subtitle">Pending Execution</div>
+                  </div>
+                  <div className="analytics-card">
+                    <div className="analytics-title">Active Investment</div>
+                    <div className="analytics-value" style={{ color: 'var(--accent-green)' }}>{longTermTrades.length}</div>
+                    <div className="analytics-subtitle">Pending Execution</div>
+                  </div>
+                </div>
+                
                 <ActiveTradeTable trades={intradayTrades} title="Intraday Setups" />
                 <ActiveTradeTable trades={longTermTrades} title="Investment (Long Term) Setups" />
               </>
