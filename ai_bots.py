@@ -35,6 +35,7 @@ Return the response STRICTLY as a valid JSON object with the following schema:
     "buy_or_sell": "BUY",  // or "SELL" or "HOLD"
     "type": "{trade_type}",
     "time_period": "{'1 Day' if trade_type == 'intraday' else '3-6 Months'}",
+    "open_price": 0.0,
     "entry_point": 0.0,
     "target_1": 0.0,
     "target_2": 0.0,

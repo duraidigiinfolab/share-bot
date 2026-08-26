@@ -1,96 +1,81 @@
 import React, { useState, useEffect } from 'react';
-import TradeCard from './components/TradeCard';
+import ActiveTradeTable from './components/ActiveTradeTable';
 import ReportsView from './components/ReportsView';
 
 function App() {
-  const [trades, setTrades] = useState([]);
+  const [activeTab, setActiveTab] = useState('active');
+  const [data, setData] = useState({ trades: [], last_updated: '' });
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch directly from the raw GitHub file so it always shows the latest trades!
-    // Added a cache-busting query parameter so browsers don't cache old data
-    const fetchTrades = async () => {
-      try {
-        const response = await fetch(
-          `https://raw.githubusercontent.com/duraidigiinfolab/share-bot/main/tracker.json?t=${new Date().getTime()}`
-        );
-        if (!response.ok) throw new Error('Failed to fetch trades');
-        const data = await response.json();
-        // Sort by date descending (newest first)
-        const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-        setTrades(sortedData);
-      } catch (error) {
-        console.error("Error fetching tracker.json:", error);
-      } finally {
+    // Adding a timestamp to prevent browser caching of the raw JSON file
+    const cacheBuster = new Date().getTime();
+    fetch(`https://raw.githubusercontent.com/duraidigiinfolab/share-bot/main/tracker.json?t=${cacheBuster}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch data');
+        return res.json();
+      })
+      .then((jsonData) => {
+        // Sort trades by date (newest first)
+        const sortedTrades = (jsonData.trades || []).sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        });
+        setData({ ...jsonData, trades: sortedTrades });
         setLoading(false);
-      }
-    };
-
-    fetchTrades();
+      })
+      .catch((err) => {
+        console.error(err);
+        setError('Failed to load market data. Please try again later.');
+        setLoading(false);
+      });
   }, []);
 
-  if (loading) {
-    return <div className="loader">Loading Market Intelligence...</div>;
-  }
-
-  // Split trades into Intraday and Investment
-  const intradayTrades = trades.filter(t => t.signal?.type === 'intraday');
-  const investmentTrades = trades.filter(t => t.signal?.type === 'long term');
+  // Filter ONLY PENDING trades for the Active Setups dashboard
+  const pendingTrades = data.trades.filter(t => t.status === 'PENDING');
+  const intradayTrades = pendingTrades.filter(t => t.signal?.type === 'intraday');
+  const longTermTrades = pendingTrades.filter(t => t.signal?.type === 'long term');
 
   return (
     <>
-      <header>
-        <h1>Trade Terminal</h1>
-        <p className="subtitle">Algorithmic Quantitative Analysis</p>
-        
+      <div className="dashboard-container">
+        <header className="dashboard-header">
+          <h1>Algorithmic Quantitative Analysis</h1>
+          {data.last_updated && <p>Last System Update: {data.last_updated}</p>}
+        </header>
+
         <div className="tabs">
           <button 
-            className={`tab ${activeTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveTab('dashboard')}
+            className={`tab-btn ${activeTab === 'active' ? 'active' : ''}`}
+            onClick={() => setActiveTab('active')}
           >
             Active Setups
           </button>
           <button 
-            className={`tab ${activeTab === 'reports' ? 'active' : ''}`}
+            className={`tab-btn ${activeTab === 'reports' ? 'active' : ''}`}
             onClick={() => setActiveTab('reports')}
           >
             Analytics & Reports
           </button>
         </div>
-      </header>
 
-      {activeTab === 'dashboard' ? (
-        <div className="dashboard-grid">
-          <section>
-            <h2 className="section-title">
-              <span style={{ color: 'var(--accent-blue)' }}>⚡</span> Intraday Setups
-            </h2>
-            {intradayTrades.length === 0 ? (
-              <div className="empty-state">No intraday trades available.</div>
+        {loading ? (
+          <div className="loading">Initializing trading engine...</div>
+        ) : error ? (
+          <div className="error">{error}</div>
+        ) : (
+          <div className="tab-content">
+            {activeTab === 'active' ? (
+              <>
+                <ActiveTradeTable trades={intradayTrades} title="Intraday Setups" />
+                <ActiveTradeTable trades={longTermTrades} title="Investment (Long Term) Setups" />
+              </>
             ) : (
-              intradayTrades.map((trade, index) => (
-                <TradeCard key={`intra-${index}`} trade={trade} />
-              ))
+              <ReportsView trades={data.trades} />
             )}
-          </section>
-
-          <section>
-            <h2 className="section-title">
-              <span style={{ color: 'var(--accent-green)' }}>📈</span> Investment (Long Term)
-            </h2>
-            {investmentTrades.length === 0 ? (
-              <div className="empty-state">No investment trades available.</div>
-            ) : (
-              investmentTrades.map((trade, index) => (
-                <TradeCard key={`invest-${index}`} trade={trade} />
-              ))
-            )}
-          </section>
-        </div>
-      ) : (
-        <ReportsView trades={trades} />
-      )}
+          </div>
+        )}
+      </div>
 
       <footer className="dashboard-footer">
         <h3>⚠️ LEGAL & FINANCIAL DISCLAIMER (SEBI COMPLIANCE)</h3>

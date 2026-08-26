@@ -324,6 +324,7 @@ h1 {
 .trade-table th, .trade-table td {
   padding: 1rem;
   border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
 }
 
 .trade-table th {
@@ -340,4 +341,15 @@ h1 {
 
 .trade-table tr:last-child td {
   border-bottom: none;
+}
+
+.expanded-row td {
+  border-top: none;
+  padding: 0 !important;
+}
+
+.expanded-row > td > div {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  white-space: normal;
 }

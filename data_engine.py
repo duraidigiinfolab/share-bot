@@ -67,10 +67,12 @@ def format_data_for_ai(stock_data, headlines):
     sma_200 = round(latest.get('SMA_200', 0), 2)
     
     close_price = round(latest['Close'], 2)
+    open_price = round(latest['Open'], 2)
     volume = latest['Volume']
     
     summary = f"""
 Stock: {stock_data['symbol']}
+Day Open Price: {open_price}
 Current Price: {close_price}
 Previous Price: {round(prev['Close'], 2)}
 Volume: {volume}

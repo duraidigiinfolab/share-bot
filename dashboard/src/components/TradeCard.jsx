@@ -14,6 +14,11 @@ const TradeCard = ({ trade }) => {
     expectedPnL = ((diff / signal.entry_point) * 100).toFixed(2);
   }
   
+  const getPnl = (target) => {
+    if (!signal.entry_point || !target) return '0.00';
+    return ((Math.abs(target - signal.entry_point) / signal.entry_point) * 100).toFixed(2);
+  };
+  
   return (
     <div 
       className="trade-card" 
@@ -50,9 +55,9 @@ const TradeCard = ({ trade }) => {
       <div className="targets">
         <span className="price-label">Targets</span>
         <div className="targets-list">
-          <span className="target-pill">T1: ₹{signal.target_1}</span>
-          <span className="target-pill">T2: ₹{signal.target_2}</span>
-          <span className="target-pill">T3: ₹{signal.target_3}</span>
+          <span className="target-pill">T1: ₹{signal.target_1} <span style={{opacity: 0.7, fontSize: '0.85em'}}>(+{getPnl(signal.target_1)}%)</span></span>
+          <span className="target-pill">T2: ₹{signal.target_2} <span style={{opacity: 0.7, fontSize: '0.85em'}}>(+{getPnl(signal.target_2)}%)</span></span>
+          <span className="target-pill">T3: ₹{signal.target_3} <span style={{opacity: 0.7, fontSize: '0.85em'}}>(+{getPnl(signal.target_3)}%)</span></span>
         </div>
       </div>
       
