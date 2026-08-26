@@ -1,7 +1,7 @@
 import json
 import os
 import yfinance as yf
-from datetime import datetime
+from datetime import datetime, timedelta
 
 TRACKER_FILE = "tracker.json"
 
@@ -34,6 +34,69 @@ def add_signal(stock_symbol, signal_data):
     }
     data.append(entry)
     save_tracker(data)
+
+def get_signal_count(trade_type, timeframe):
+    """
+    Returns the number of signals generated for a specific type and timeframe.
+    timeframe: "today" or "this_week"
+    """
+    data = load_tracker()
+    count = 0
+    now = datetime.now()
+    
+    for entry in data:
+        if entry.get("signal", {}).get("type") != trade_type:
+            continue
+            
+        date_str = entry.get("date")
+        if not date_str:
+            continue
+            
+        signal_date = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").date()
+        
+        if timeframe == "today" and signal_date == now.date():
+            count += 1
+        elif timeframe == "this_week":
+            # Check if it falls in the current calendar week (Monday to Sunday)
+            start_of_week = (now - timedelta(days=now.weekday())).date()
+            if signal_date >= start_of_week:
+                count += 1
+                
+    return count
+
+def get_weekly_accuracy():
+    """
+    Calculates the bot's accuracy (win rate) for trades closed in the last 7 days.
+    """
+    data = load_tracker()
+    now = datetime.now()
+    seven_days_ago = (now - timedelta(days=7)).date()
+    
+    wins = 0
+    losses = 0
+    
+    for entry in data:
+        status = entry.get("status")
+        if status not in ["WIN", "LOSS"]:
+            continue
+            
+        date_str = entry.get("date")
+        if not date_str:
+            continue
+            
+        signal_date = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").date()
+        
+        if signal_date >= seven_days_ago:
+            if status == "WIN":
+                wins += 1
+            else:
+                losses += 1
+                
+    total = wins + losses
+    if total == 0:
+        return 0.0
+        
+    return round((wins / total) * 100, 2)
 
 def evaluate_signals():
     """

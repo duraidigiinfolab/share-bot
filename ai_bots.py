@@ -63,13 +63,18 @@ Return the response STRICTLY as a valid JSON object with the following schema:
         print(f"Error generating AI signal: {e}")
         return None
 
-def analyze_stock(stock_symbol, stock_text_data):
-    """Generates both intraday and long-term signals for a stock."""
-    print(f"Running Intraday Bot for {stock_symbol}...")
-    intraday_signal = get_trading_signal(stock_text_data, "intraday")
+def analyze_stock(stock_symbol, stock_text_data, run_intraday=True, run_longterm=True):
+    """Generates both intraday and long-term signals for a stock, skipping if quotas are met."""
+    intraday_signal = None
+    long_term_signal = None
     
-    print(f"Running Investment Bot for {stock_symbol}...")
-    long_term_signal = get_trading_signal(stock_text_data, "long term")
+    if run_intraday:
+        print(f"Running Intraday Bot for {stock_symbol}...")
+        intraday_signal = get_trading_signal(stock_text_data, "intraday")
+        
+    if run_longterm:
+        print(f"Running Investment Bot for {stock_symbol}...")
+        long_term_signal = get_trading_signal(stock_text_data, "long term")
     
     return intraday_signal, long_term_signal
 

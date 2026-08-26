@@ -52,28 +52,51 @@ def run_morning_analysis():
         return
         
     print("Running Morning Analysis...")
-    send_telegram("🌅 *Market Open!* Analyzing top stocks for trading opportunities...")
+    
+    accuracy = tracker.get_weekly_accuracy()
+    
+    msg = (
+        "🌅 *Market Open!* Analyzing top stocks...\n\n"
+        f"🎯 *Past 7 Days Accuracy:* {accuracy}%\n"
+        "📊 *Live Dashboard:* [View Reports](https://duraidigiinfolab.github.io/share-bot/)\n\n"
+        "⚠️ *Disclaimer:* Automated trading software for educational purposes only. Trade at your own risk."
+    )
+    send_telegram(msg)
+    
+    # Get current counts
+    intraday_count = tracker.get_signal_count("intraday", "today")
+    longterm_count = tracker.get_signal_count("long term", "this_week")
     
     tickers = data_engine.get_nifty50_tickers()
     
     for ticker in tickers:
+        # Check if we hit both limits
+        if intraday_count >= 5 and longterm_count >= 2:
+            print("All signal quotas met. Stopping analysis.")
+            break
+            
         stock_data = data_engine.fetch_stock_data(ticker)
         if not stock_data: continue
             
         news = data_engine.get_latest_news(ticker)
         ai_prompt_text = data_engine.format_data_for_ai(stock_data, news)
         
-        intraday, longterm = ai_bots.analyze_stock(ticker, ai_prompt_text)
+        run_intra = intraday_count < 5
+        run_long = longterm_count < 2
+        
+        intraday, longterm = ai_bots.analyze_stock(ticker, ai_prompt_text, run_intra, run_long)
         
         # Process Intraday
         if intraday and intraday.get("buy_or_sell") in ["BUY", "SELL"]:
             tracker.add_signal(ticker, intraday)
             send_telegram(format_signal_message(ticker, intraday))
+            intraday_count += 1
             
         # Process Long Term
         if longterm and longterm.get("buy_or_sell") in ["BUY", "SELL"]:
             tracker.add_signal(ticker, longterm)
             send_telegram(format_signal_message(ticker, longterm))
+            longterm_count += 1
             
         # Sleep to avoid hitting Gemini API rate limits
         time.sleep(2)
