@@ -156,7 +156,7 @@
         "id": "1787756127.9166",
         "stock": "3MINDIA.NS",
         "date": "2026-08-26 20:25:27",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "intraday",
@@ -168,7 +168,8 @@
             "target_3": 33870.0,
             "stop_loss": 33470.0,
             "reasoning": "The stock has demonstrated a short-term bullish reversal from its recent low of 33,340, with price steadily rising towards 33,570. RSI has increased from 40.66 to 52.33 and MACD histogram momentum is turning positive. Furthermore, the price has crossed above the 20-period SMA of 33,529.25, suggesting continued intraday upside."
-        }
+        },
+        "actual_pnl": 2.01
     },
     {
         "id": "1787756150.241196",
@@ -192,7 +193,7 @@
         "id": "1787756171.696945",
         "stock": "AIAENG.NS",
         "date": "2026-08-26 20:26:11",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -204,7 +205,8 @@
             "target_3": 4207.0,
             "stop_loss": 4249.1,
             "reasoning": "The stock exhibits a strong short-term bearish momentum with a series of lower lows. High selling volume on the last two 15-minute bars (4706 and 4367) pushed the price below the 20-period SMA (4249.03) and 50-period SMA (4258.76). RSI at 37.08 and negative MACD (-6.38) confirm further downside potential towards key support levels."
-        }
+        },
+        "actual_pnl": 0.08
     },
     {
         "id": "1787756172.999058",
@@ -228,7 +230,7 @@
         "id": "1787756197.158764",
         "stock": "APLAPOLLO.NS",
         "date": "2026-08-26 20:26:37",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "intraday",
@@ -240,7 +242,8 @@
             "target_3": 2180.9,
             "stop_loss": 2148.0,
             "reasoning": "APLAPOLLO shows strong intraday bullish momentum, supported by a clear price breakout to 2159.00 on significantly higher volume (114,652). RSI has steadily climbed from 50.83 to 68.44 and MACD indicator is expanding positively to 3.98. Price is trading above both SMA 20 (2140.21) and SMA 50 (2137.62). Targets are calculated based on ATR multiples above the entry point, with a stop loss placed below recent consolidation support around 2148.00."
-        }
+        },
+        "actual_pnl": 1.34
     },
     {
         "id": "1787756198.762271",
@@ -282,7 +285,7 @@
         "id": "1787756314.170393",
         "stock": "AAVAS.NS",
         "date": "2026-08-26 20:28:34",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -294,7 +297,8 @@
             "target_3": 1267.19,
             "stop_loss": 1286.4,
             "reasoning": "The stock is in a strong short-term downtrend, making consecutive lower lows over the 15-minute timeframe from 1303.40 down to 1280.00. Strong selling volume accompanied the latest breakdown, MACD line continues to drop deeper into negative territory (-6.89), and RSI shows intense downward momentum at 15.13. Profit targets and stop loss are calculated using an ATR of 4.27."
-        }
+        },
+        "actual_pnl": 0.83
     },
     {
         "id": "1787756315.494104",
@@ -318,7 +322,7 @@
         "id": "1787756340.469662",
         "stock": "ACE.NS",
         "date": "2026-08-26 20:29:00",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -330,7 +334,8 @@
             "target_3": 1145.8,
             "stop_loss": 1163.4,
             "reasoning": "The stock experienced a strong bearish momentum shift on high volume, breaking below both SMA 20 (1162.46) and SMA 50 (1159.95). MACD crossed into negative territory (-0.52), and RSI dropped below 50, indicating strong selling pressure. Targets are derived using ATR (4.38) projections below entry."
-        }
+        },
+        "actual_pnl": 1.98
     },
     {
         "id": "1787756341.815478",
@@ -354,7 +359,7 @@
         "id": "1787756370.325683",
         "stock": "ADANIENSOL.NS",
         "date": "2026-08-26 20:29:30",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "intraday",
@@ -366,13 +371,14 @@
             "target_3": 1624.0,
             "stop_loss": 1591.0,
             "reasoning": "ADANIENSOL showing a strong bullish reversal over the recent periods, recovering from 1570.50 to 1602.00. RSI has expanded from 32.44 into bullish territory at 58.87, and MACD line is trending upwards at 8.40. Targets are set based on ATR projections above recent resistance levels."
-        }
+        },
+        "actual_pnl": 0.94
     },
     {
         "id": "1787756435.291165",
         "stock": "ADANIGREEN.NS",
         "date": "2026-08-26 20:30:35",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -384,13 +390,14 @@
             "target_3": 1289.4,
             "stop_loss": 1310.1,
             "reasoning": "The short-term trend shows strong consistent bearish momentum, with price making lower highs and lower lows across the last 10 periods from 1318.40 down to 1303.20. The RSI has fallen to 28.17 into oversold territory, and MACD continues to expand negatively to -3.81. Targets are projected downwards using ATR multiples, with a stop loss placed above recent minor swing highs around 1309-1310."
-        }
+        },
+        "actual_pnl": -1.94
     },
     {
         "id": "1787756486.473602",
         "stock": "ADANIPOWER.NS",
         "date": "2026-08-26 20:31:26",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -402,7 +409,8 @@
             "target_3": 205.5,
             "stop_loss": 207.98,
             "reasoning": "The stock demonstrates a clear bearish shift with MACD steadily declining from 0.82 to 0.17 and RSI dropping sharply from 55.12 to 41.91. The latest candle broke below recent support at 207.60 to close at the low of 207.20, signaling intraday selling pressure toward SMA 50 (206.66)."
-        }
+        },
+        "actual_pnl": -3.76
     },
     {
         "id": "1787756509.32436",
@@ -426,7 +434,7 @@
         "id": "1787756568.045849",
         "stock": "ATGL.NS",
         "date": "2026-08-26 20:32:48",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -438,6 +446,7 @@
             "target_3": 634.0,
             "stop_loss": 644.5,
             "reasoning": "Strong bearish momentum is evident as price dropped sharply from 647.90 to 641.50 on significantly higher volume (118k+). RSI fell into bearish territory at 38.77, MACD is rapidly declining towards zero, and the price traded below both SMA 20 (646.41) and SMA 50 (642.24)."
-        }
+        },
+        "actual_pnl": -0.6
     }
 ]
