@@ -249,7 +249,7 @@
         "id": "1787756198.762271",
         "stock": "APLAPOLLO.NS",
         "date": "2026-08-26 20:26:38",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "long term",
@@ -261,7 +261,8 @@
             "target_3": 2350.0,
             "stop_loss": 2075.0,
             "reasoning": "APLAPOLLO has demonstrated strong bullish momentum over the 10-day period, advancing consistently from 2064.30 to 2159.00. Technical indicators reinforce this trend, with the MACD steadily rising to 76.89 and RSI staying strong at 77.56. The stock trades safely above its 20-day SMA (2032.77) and 50-day SMA (1904.02), signaling a healthy long-term uptrend."
-        }
+        },
+        "actual_pnl": 4.94
     },
     {
         "id": "1787756242.19708",
