@@ -449,5 +449,195 @@
             "reasoning": "Strong bearish momentum is evident as price dropped sharply from 647.90 to 641.50 on significantly higher volume (118k+). RSI fell into bearish territory at 38.77, MACD is rapidly declining towards zero, and the price traded below both SMA 20 (646.41) and SMA 50 (642.24)."
         },
         "actual_pnl": -0.6
+    },
+    {
+        "id": "1788171033.009661",
+        "stock": "ACMESOLAR.NS",
+        "date": "2026-08-31 10:10:33",
+        "status": "PENDING",
+        "signal": {
+            "stock": "ACMESOLAR.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 389.75,
+            "entry_point": 411.0,
+            "target_1": 415.6,
+            "target_2": 420.2,
+            "target_3": 424.8,
+            "stop_loss": 404.85,
+            "reasoning": "Strong bullish momentum confirmed by a sharp volume spike and price breakout above SMA 20/50. RSI surged above 85 with MACD crossing into positive territory."
+        }
+    },
+    {
+        "id": "1788171033.556517",
+        "stock": "GABRIEL.NS",
+        "date": "2026-08-31 10:10:33",
+        "status": "PENDING",
+        "signal": {
+            "stock": "GABRIEL.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 1422.7,
+            "entry_point": 1454.0,
+            "target_1": 1472.6,
+            "target_2": 1491.2,
+            "target_3": 1509.8,
+            "stop_loss": 1435.4,
+            "reasoning": "Consistently higher highs over the 10-period timeframe with strong RSI above 78 and positive MACD histogram expansion, backed by increasing volume on the final bar."
+        }
+    },
+    {
+        "id": "1788171034.06123",
+        "stock": "CYIENT.NS",
+        "date": "2026-08-31 10:10:34",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CYIENT.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 1147.0,
+            "entry_point": 1175.0,
+            "target_1": 1190.85,
+            "target_2": 1206.7,
+            "target_3": 1222.55,
+            "stop_loss": 1159.1,
+            "reasoning": "Sustained uptrend with price holding well above SMA 20 (1148.87) and SMA 50 (1117.56). RSI remains in high bullish territory (~71) with steady MACD expansion."
+        }
+    },
+    {
+        "id": "1788171034.555454",
+        "stock": "VIJAYA.NS",
+        "date": "2026-08-31 10:10:34",
+        "status": "PENDING",
+        "signal": {
+            "stock": "VIJAYA.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 1498.5,
+            "entry_point": 1521.4,
+            "target_1": 1534.4,
+            "target_2": 1547.35,
+            "target_3": 1560.3,
+            "stop_loss": 1508.4,
+            "reasoning": "Breakout pattern with momentum indicators showing bullish strength (RSI 76.09, MACD 14.59) and price trading significantly above key moving averages."
+        }
+    },
+    {
+        "id": "1788171035.073357",
+        "stock": "LUPIN.NS",
+        "date": "2026-08-31 10:10:35",
+        "status": "PENDING",
+        "signal": {
+            "stock": "LUPIN.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 2164.8,
+            "entry_point": 2185.0,
+            "target_1": 2193.9,
+            "target_2": 2202.8,
+            "target_3": 2211.7,
+            "stop_loss": 2176.1,
+            "reasoning": "Massive volume surge on the latest 15m candle driving a bullish breakout above short-term resistance. RSI jumped to 71.94 with MACD crossing above the zero line."
+        }
+    },
+    {
+        "id": "1788171035.583669",
+        "stock": "CYIENT.NS",
+        "date": "2026-08-31 10:10:35",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CYIENT.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 1174.8,
+            "entry_point": 1174.8,
+            "target_1": 1250.0,
+            "target_2": 1320.0,
+            "target_3": 1400.0,
+            "stop_loss": 1080.0,
+            "reasoning": "Strong bullish momentum with RSI rising to 86.90 and MACD steadily expanding. Volume remains high following consecutive daily gains and a sharp multi-day breakout."
+        }
+    },
+    {
+        "id": "1788171039.259494",
+        "stock": "DIVISLAB.NS",
+        "date": "2026-08-31 10:10:39",
+        "status": "PENDING",
+        "signal": {
+            "stock": "DIVISLAB.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 9467.0,
+            "entry_point": 9467.0,
+            "target_1": 9850.0,
+            "target_2": 10200.0,
+            "target_3": 10600.0,
+            "stop_loss": 9080.0,
+            "reasoning": "Steady trend continuation with strong buying volume, pushing price to 9,467. RSI at 83.89 and expanding MACD indicate persistent institutional buying interest."
+        }
+    },
+    {
+        "id": "1788171039.780312",
+        "stock": "ATHERENERG.NS",
+        "date": "2026-08-31 10:10:39",
+        "status": "PENDING",
+        "signal": {
+            "stock": "ATHERENERG.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 1717.7,
+            "entry_point": 1717.7,
+            "target_1": 1830.0,
+            "target_2": 1950.0,
+            "target_3": 2080.0,
+            "stop_loss": 1580.0,
+            "reasoning": "Dramatic high-volume surge over the last two trading sessions with volume increasing to nearly 20M shares. MACD and RSI demonstrate explosive upside continuation."
+        }
+    },
+    {
+        "id": "1788171040.296107",
+        "stock": "BOSCHLTD.NS",
+        "date": "2026-08-31 10:10:40",
+        "status": "PENDING",
+        "signal": {
+            "stock": "BOSCHLTD.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 50000.0,
+            "entry_point": 50000.0,
+            "target_1": 52200.0,
+            "target_2": 54500.0,
+            "target_3": 57000.0,
+            "stop_loss": 48100.0,
+            "reasoning": "Key psychological level breakout at 50,000 accompanied by double average volume. MACD remains strongly positive at 2037.41 with RSI at 79.16."
+        }
+    },
+    {
+        "id": "1788171040.785269",
+        "stock": "MCX.NS",
+        "date": "2026-08-31 10:10:40",
+        "status": "PENDING",
+        "signal": {
+            "stock": "MCX.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 3400.0,
+            "entry_point": 3400.0,
+            "target_1": 3580.0,
+            "target_2": 3750.0,
+            "target_3": 3950.0,
+            "stop_loss": 3220.0,
+            "reasoning": "Clean uptrend over the 10-day period advancing from 3032 to 3400. Strong momentum confirmed by RSI at 73.03 and MACD accelerating to 151.49."
+        }
     }
 ]
