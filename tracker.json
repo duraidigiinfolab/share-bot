@@ -687,7 +687,7 @@
         "id": "1788253343.663092",
         "stock": "ICICIGI.NS",
         "date": "2026-09-01 09:02:23",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "ICICIGI.NS",
             "buy_or_sell": "BUY",
@@ -700,7 +700,8 @@
             "target_3": 1586.5,
             "stop_loss": 1568.1,
             "reasoning": "Consistent multi-candle uptrend climbing from 1546.00 to 1572.70. RSI steadily expanded from 43.80 to 69.86 and MACD flipped strongly positive (4.95), staying well above SMA 20."
-        }
+        },
+        "actual_pnl": -0.37
     },
     {
         "id": "1788253344.255023",
