@@ -644,5 +644,195 @@
             "stop_loss": 3220.0,
             "reasoning": "Clean uptrend over the 10-day period advancing from 3032 to 3400. Strong momentum confirmed by RSI at 73.03 and MACD accelerating to 151.49."
         }
+    },
+    {
+        "id": "1788253342.389485",
+        "stock": "WELCORP.NS",
+        "date": "2026-09-01 09:02:22",
+        "status": "PENDING",
+        "signal": {
+            "stock": "WELCORP.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 2507.9,
+            "entry_point": 2537.0,
+            "target_1": 2555.0,
+            "target_2": 2573.0,
+            "target_3": 2590.0,
+            "stop_loss": 2519.0,
+            "reasoning": "Strong upward trajectory with Close rising from 2507.90 to 2537.00, accompanied by a high RSI of 77.67 and expanding positive MACD (30.97). Price is trading well above its 20 SMA (2480.64) and 50 SMA (2418.72)."
+        }
+    },
+    {
+        "id": "1788253343.072097",
+        "stock": "GILLETTE.NS",
+        "date": "2026-09-01 09:02:23",
+        "status": "PENDING",
+        "signal": {
+            "stock": "GILLETTE.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 7286.0,
+            "entry_point": 7406.0,
+            "target_1": 7430.0,
+            "target_2": 7453.0,
+            "target_3": 7476.0,
+            "stop_loss": 7382.0,
+            "reasoning": "Sharp volume-backed momentum push in the most recent candle, taking price from 7286.00 to 7406.00. RSI surged into strong bullish territory (71.72) with a MACD crossover to 12.84."
+        }
+    },
+    {
+        "id": "1788253343.663092",
+        "stock": "ICICIGI.NS",
+        "date": "2026-09-01 09:02:23",
+        "status": "PENDING",
+        "signal": {
+            "stock": "ICICIGI.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 1546.3,
+            "entry_point": 1572.7,
+            "target_1": 1577.3,
+            "target_2": 1581.9,
+            "target_3": 1586.5,
+            "stop_loss": 1568.1,
+            "reasoning": "Consistent multi-candle uptrend climbing from 1546.00 to 1572.70. RSI steadily expanded from 43.80 to 69.86 and MACD flipped strongly positive (4.95), staying well above SMA 20."
+        }
+    },
+    {
+        "id": "1788253344.255023",
+        "stock": "BLUESTARCO.NS",
+        "date": "2026-09-01 09:02:24",
+        "status": "PENDING",
+        "signal": {
+            "stock": "BLUESTARCO.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 1476.1,
+            "entry_point": 1491.8,
+            "target_1": 1496.92,
+            "target_2": 1502.04,
+            "target_3": 1507.16,
+            "stop_loss": 1486.68,
+            "reasoning": "Steady higher-highs and higher-lows pattern over the 10-period timeframe. RSI moved up from 57.61 to 66.61 while MACD increased to 4.53, showing healthy intraday momentum."
+        }
+    },
+    {
+        "id": "1788253344.875499",
+        "stock": "KIRLOSENG.NS",
+        "date": "2026-09-01 09:02:24",
+        "status": "PENDING",
+        "signal": {
+            "stock": "KIRLOSENG.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 2103.6,
+            "entry_point": 2136.2,
+            "target_1": 2146.91,
+            "target_2": 2157.62,
+            "target_3": 2168.33,
+            "stop_loss": 2125.49,
+            "reasoning": "Sustained bullish expansion from 2103.60 to 2136.20. RSI crossed above 70 (71.50) with accelerating MACD histogram momentum up to 6.34, supported by prices trading above SMA 20 (2109.68)."
+        }
+    },
+    {
+        "id": "1788253345.470661",
+        "stock": "ENGINERSIN.NS",
+        "date": "2026-09-01 09:02:25",
+        "status": "PENDING",
+        "signal": {
+            "stock": "ENGINERSIN.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 279.15,
+            "entry_point": 279.15,
+            "target_1": 295.0,
+            "target_2": 310.0,
+            "target_3": 325.0,
+            "stop_loss": 258.0,
+            "reasoning": "Massive volume expansion on a strong single-day breakout to 279.15 from recent consolidation. RSI has surged to 73.47 and MACD trend is aggressively expanding upwards."
+        }
+    },
+    {
+        "id": "1788253349.326008",
+        "stock": "WELCORP.NS",
+        "date": "2026-09-01 09:02:29",
+        "status": "PENDING",
+        "signal": {
+            "stock": "WELCORP.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 2537.0,
+            "entry_point": 2537.0,
+            "target_1": 2680.0,
+            "target_2": 2800.0,
+            "target_3": 2920.0,
+            "stop_loss": 2360.0,
+            "reasoning": "Strong trend continuation making new high of 2538.80 with RSI over 82 and MACD at 204.79. Steady higher highs and higher lows over the 10-day history indicate powerful bullish momentum."
+        }
+    },
+    {
+        "id": "1788253349.925773",
+        "stock": "CYIENT.NS",
+        "date": "2026-09-01 09:02:29",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CYIENT.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 1158.9,
+            "entry_point": 1158.9,
+            "target_1": 1220.0,
+            "target_2": 1270.0,
+            "target_3": 1320.0,
+            "stop_loss": 1080.0,
+            "reasoning": "Massive multi-day breakout from 894 levels up to above 1150 with high volume support. MACD at 69.26 shows tremendous upward momentum."
+        }
+    },
+    {
+        "id": "1788253350.530632",
+        "stock": "ATHERENERG.NS",
+        "date": "2026-09-01 09:02:30",
+        "status": "PENDING",
+        "signal": {
+            "stock": "ATHERENERG.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 1715.8,
+            "entry_point": 1715.8,
+            "target_1": 1800.0,
+            "target_2": 1870.0,
+            "target_3": 1950.0,
+            "stop_loss": 1610.0,
+            "reasoning": "Strong uptrend over the 10-day period with significant volume increases. RSI at 78.06 and MACD at 87.35 suggest sustained buying pressure."
+        }
+    },
+    {
+        "id": "1788253351.161291",
+        "stock": "CPPLUS.NS",
+        "date": "2026-09-01 09:02:31",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CPPLUS.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 3700.0,
+            "entry_point": 3700.0,
+            "target_1": 3850.0,
+            "target_2": 3950.0,
+            "target_3": 4050.0,
+            "stop_loss": 3500.0,
+            "reasoning": "Strong bullish momentum moving from 3303.5 to 3700.0 over 10 days. The MACD flipped positive to 14.30 and RSI climbed to 57.79, signaling fresh upside trajectory."
+        }
     }
 ]
