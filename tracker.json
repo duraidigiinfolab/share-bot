@@ -611,7 +611,7 @@
         "id": "1788171040.296107",
         "stock": "BOSCHLTD.NS",
         "date": "2026-08-31 10:10:40",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "BOSCHLTD.NS",
             "buy_or_sell": "BUY",
@@ -624,7 +624,8 @@
             "target_3": 57000.0,
             "stop_loss": 48100.0,
             "reasoning": "Key psychological level breakout at 50,000 accompanied by double average volume. MACD remains strongly positive at 2037.41 with RSI at 79.16."
-        }
+        },
+        "actual_pnl": -5.5
     },
     {
         "id": "1788171040.785269",
@@ -649,7 +650,7 @@
         "id": "1788253342.389485",
         "stock": "WELCORP.NS",
         "date": "2026-09-01 09:02:22",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "WELCORP.NS",
             "buy_or_sell": "BUY",
@@ -662,13 +663,14 @@
             "target_3": 2590.0,
             "stop_loss": 2519.0,
             "reasoning": "Strong upward trajectory with Close rising from 2507.90 to 2537.00, accompanied by a high RSI of 77.67 and expanding positive MACD (30.97). Price is trading well above its 20 SMA (2480.64) and 50 SMA (2418.72)."
-        }
+        },
+        "actual_pnl": -0.53
     },
     {
         "id": "1788253343.072097",
         "stock": "GILLETTE.NS",
         "date": "2026-09-01 09:02:23",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "GILLETTE.NS",
             "buy_or_sell": "BUY",
@@ -681,7 +683,8 @@
             "target_3": 7476.0,
             "stop_loss": 7382.0,
             "reasoning": "Sharp volume-backed momentum push in the most recent candle, taking price from 7286.00 to 7406.00. RSI surged into strong bullish territory (71.72) with a MACD crossover to 12.84."
-        }
+        },
+        "actual_pnl": -0.81
     },
     {
         "id": "1788253343.663092",
@@ -707,7 +710,7 @@
         "id": "1788253344.255023",
         "stock": "BLUESTARCO.NS",
         "date": "2026-09-01 09:02:24",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "BLUESTARCO.NS",
             "buy_or_sell": "BUY",
@@ -720,13 +723,14 @@
             "target_3": 1507.16,
             "stop_loss": 1486.68,
             "reasoning": "Steady higher-highs and higher-lows pattern over the 10-period timeframe. RSI moved up from 57.61 to 66.61 while MACD increased to 4.53, showing healthy intraday momentum."
-        }
+        },
+        "actual_pnl": -3.12
     },
     {
         "id": "1788253344.875499",
         "stock": "KIRLOSENG.NS",
         "date": "2026-09-01 09:02:24",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "KIRLOSENG.NS",
             "buy_or_sell": "BUY",
@@ -739,7 +743,8 @@
             "target_3": 2168.33,
             "stop_loss": 2125.49,
             "reasoning": "Sustained bullish expansion from 2103.60 to 2136.20. RSI crossed above 70 (71.50) with accelerating MACD histogram momentum up to 6.34, supported by prices trading above SMA 20 (2109.68)."
-        }
+        },
+        "actual_pnl": 1.16
     },
     {
         "id": "1788253345.470661",
@@ -897,7 +902,7 @@
         "id": "1788336694.853867",
         "stock": "TORNTPOWER.NS",
         "date": "2026-09-02 08:11:34",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "TORNTPOWER.NS",
             "buy_or_sell": "BUY",
@@ -910,13 +915,14 @@
             "target_3": 1290.0,
             "stop_loss": 1253.0,
             "reasoning": "Strong trend structure staying above both SMA 20 (1246.95) and SMA 50 (1223.33). MACD remains very strong at 11.99 and RSI maintains high bullish momentum around 75.12."
-        }
+        },
+        "actual_pnl": -1.09
     },
     {
         "id": "1788336695.381348",
         "stock": "CLEAN.NS",
         "date": "2026-09-02 08:11:35",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "CLEAN.NS",
             "buy_or_sell": "BUY",
@@ -929,6 +935,7 @@
             "target_3": 872.0,
             "stop_loss": 842.0,
             "reasoning": "Robust trend reversal from 821 to 850 with MACD turning sharply positive to 7.15 and RSI elevated at 68.32. Price comfortably trades above SMA 20 (832.31), presenting a favorable trend continuation trade."
-        }
+        },
+        "actual_pnl": 1.5
     }
 ]
