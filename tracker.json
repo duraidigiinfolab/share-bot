@@ -631,7 +631,7 @@
         "id": "1788171040.785269",
         "stock": "MCX.NS",
         "date": "2026-08-31 10:10:40",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "MCX.NS",
             "buy_or_sell": "BUY",
@@ -644,7 +644,8 @@
             "target_3": 3950.0,
             "stop_loss": 3220.0,
             "reasoning": "Clean uptrend over the 10-day period advancing from 3032 to 3400. Strong momentum confirmed by RSI at 73.03 and MACD accelerating to 151.49."
-        }
+        },
+        "actual_pnl": -6.76
     },
     {
         "id": "1788253342.389485",
@@ -845,7 +846,7 @@
         "id": "1788336693.17074",
         "stock": "KIRLOSENG.NS",
         "date": "2026-09-02 08:11:33",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "KIRLOSENG.NS",
             "buy_or_sell": "BUY",
@@ -858,13 +859,14 @@
             "target_3": 2225.0,
             "stop_loss": 2137.0,
             "reasoning": "Strong bullish momentum visible in the 10-day 15m trend. The price surged from 2120 to 2163 on massive volume expansion (107k vs 3k average). RSI expanded into bullish territory at 67.83, and MACD line is trending upwards at 6.64 above its signal line."
-        }
+        },
+        "actual_pnl": 4.83
     },
     {
         "id": "1788336693.770144",
         "stock": "OIL.NS",
         "date": "2026-09-02 08:11:33",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "OIL.NS",
             "buy_or_sell": "BUY",
@@ -877,13 +879,14 @@
             "target_3": 508.0,
             "stop_loss": 493.0,
             "reasoning": "Clear breakout setup from a consolidation range between 485-487 up to 497.20. RSI strengthened from sub-50 to 72.14 alongside a positive MACD crossover reaching 1.16, indicating accelerating upward momentum."
-        }
+        },
+        "actual_pnl": -1.45
     },
     {
         "id": "1788336694.307151",
         "stock": "MEESHO.NS",
         "date": "2026-09-02 08:11:34",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "MEESHO.NS",
             "buy_or_sell": "BUY",
@@ -896,7 +899,8 @@
             "target_3": 217.5,
             "stop_loss": 208.5,
             "reasoning": "Consistent price appreciation over recent candles with strong volume support (over 500k volume). RSI has steadily climbed to 69.06 while MACD reached 1.01, confirming sustained buying interest above SMA 20 (207.17)."
-        }
+        },
+        "actual_pnl": -0.57
     },
     {
         "id": "1788336694.853867",
