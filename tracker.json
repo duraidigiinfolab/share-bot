@@ -71,7 +71,7 @@
         "id": "1787722555.632769",
         "stock": "SBIN.NS",
         "date": "2026-08-26 05:35:55",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "long term",
@@ -82,7 +82,8 @@
             "target_3": 1210.0,
             "stop_loss": 1020.0,
             "reasoning": "Price trades comfortably above the 50-day SMA with neutral RSI, confirming a strong underlying long-term uptrend."
-        }
+        },
+        "actual_pnl": -3.78
     },
     {
         "id": "1787722609.445179",
@@ -808,7 +809,7 @@
         "id": "1788253350.530632",
         "stock": "ATHERENERG.NS",
         "date": "2026-09-01 09:02:30",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "ATHERENERG.NS",
             "buy_or_sell": "BUY",
@@ -821,7 +822,8 @@
             "target_3": 1950.0,
             "stop_loss": 1610.0,
             "reasoning": "Strong uptrend over the 10-day period with significant volume increases. RSI at 78.06 and MACD at 87.35 suggest sustained buying pressure."
-        }
+        },
+        "actual_pnl": -7.68
     },
     {
         "id": "1788253351.161291",
