@@ -943,5 +943,100 @@
             "reasoning": "Robust trend reversal from 821 to 850 with MACD turning sharply positive to 7.15 and RSI elevated at 68.32. Price comfortably trades above SMA 20 (832.31), presenting a favorable trend continuation trade."
         },
         "actual_pnl": 1.5
+    },
+    {
+        "id": "1788770641.912507",
+        "stock": "CAPLIPOINT.NS",
+        "date": "2026-09-07 08:44:01",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CAPLIPOINT.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 2808.5,
+            "entry_point": 2808.5,
+            "target_1": 2950.0,
+            "target_2": 3050.0,
+            "target_3": 3180.0,
+            "stop_loss": 2680.0,
+            "reasoning": "Caplin Point has demonstrated powerful bullish momentum over the 10-day period, rallying from 2471.80 to 2808.50. MACD has surged from negative territory to +62.78, accompanied by high volume spikes and healthy RSI at 66.76, signaling strong buying interest."
+        }
+    },
+    {
+        "id": "1788770642.536491",
+        "stock": "SOLARINDS.NS",
+        "date": "2026-09-07 08:44:02",
+        "status": "PENDING",
+        "signal": {
+            "stock": "SOLARINDS.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 21755.0,
+            "entry_point": 21755.0,
+            "target_1": 22600.0,
+            "target_2": 23500.0,
+            "target_3": 24500.0,
+            "stop_loss": 20800.0,
+            "reasoning": "Solar Industries shows an intact uptrend making a series of higher highs from 19800 to 21755. MACD is expanding rapidly (+646.70) with an RSI of 73.33, confirming robust institutional accumulation above key moving averages."
+        }
+    },
+    {
+        "id": "1788770643.141636",
+        "stock": "SYRMA.NS",
+        "date": "2026-09-07 08:44:03",
+        "status": "PENDING",
+        "signal": {
+            "stock": "SYRMA.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 1612.8,
+            "entry_point": 1612.8,
+            "target_1": 1720.0,
+            "target_2": 1800.0,
+            "target_3": 1900.0,
+            "stop_loss": 1510.0,
+            "reasoning": "Syrma SGS recorded a massive high-volume breakout on September 7th, surging over 10% to 1612.80 with over 9.2 million shares traded. RSI shifted to 70.92 and MACD expanded to 24.57, signifying a major continuation pattern."
+        }
+    },
+    {
+        "id": "1788770643.707933",
+        "stock": "SPLPETRO.NS",
+        "date": "2026-09-07 08:44:03",
+        "status": "PENDING",
+        "signal": {
+            "stock": "SPLPETRO.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 803.4,
+            "entry_point": 803.4,
+            "target_1": 850.0,
+            "target_2": 890.0,
+            "target_3": 940.0,
+            "stop_loss": 755.0,
+            "reasoning": "Supreme Petrochem broke out strongly from a multi-day consolidation around 700 to close at 803.40. MACD turned strongly positive (+11.65) and RSI expanded to 72.56 with increasing daily volumes, indicating high bullish conviction."
+        }
+    },
+    {
+        "id": "1788770644.320959",
+        "stock": "CPPLUS.NS",
+        "date": "2026-09-07 08:44:04",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CPPLUS.NS",
+            "buy_or_sell": "BUY",
+            "type": "long term",
+            "time_period": "3-6 Months",
+            "open_price": 3759.9,
+            "entry_point": 3759.9,
+            "target_1": 3950.0,
+            "target_2": 4100.0,
+            "target_3": 4300.0,
+            "stop_loss": 3580.0,
+            "reasoning": "CP Plus showed a dramatic MACD trajectory shift from -29.79 up to +52.27 as price steadily appreciated from 3393.50 to 3759.90. Staying cleanly above SMA 20 (3582.01) with healthy RSI confirms sustainable medium-term momentum."
+        }
     }
 ]
