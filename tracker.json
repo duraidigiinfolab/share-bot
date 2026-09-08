@@ -1038,5 +1038,100 @@
             "stop_loss": 3580.0,
             "reasoning": "CP Plus showed a dramatic MACD trajectory shift from -29.79 up to +52.27 as price steadily appreciated from 3393.50 to 3759.90. Staying cleanly above SMA 20 (3582.01) with healthy RSI confirms sustainable medium-term momentum."
         }
+    },
+    {
+        "id": "1788855793.988873",
+        "stock": "BHARATFORG.NS",
+        "date": "2026-09-08 08:23:13",
+        "status": "PENDING",
+        "signal": {
+            "stock": "BHARATFORG.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 2016.1,
+            "entry_point": 2016.1,
+            "target_1": 2026.0,
+            "target_2": 2035.0,
+            "target_3": 2045.0,
+            "stop_loss": 2001.0,
+            "reasoning": "BHARATFORG exhibits strong bullish momentum with RSI remaining above 70 and MACD showing an upward trend. Price is trading well above SMA 20 (1977.02) and SMA 50 (1958.34)."
+        }
+    },
+    {
+        "id": "1788855794.582648",
+        "stock": "CRAFTSMAN.NS",
+        "date": "2026-09-08 08:23:14",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CRAFTSMAN.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 11525.0,
+            "entry_point": 11525.0,
+            "target_1": 11565.0,
+            "target_2": 11600.0,
+            "target_3": 11640.0,
+            "stop_loss": 11470.0,
+            "reasoning": "Consistently making higher highs with RSI hovering above 70 and MACD expanding upward. Price holds comfortably above key moving averages."
+        }
+    },
+    {
+        "id": "1788855795.134333",
+        "stock": "FINCABLES.NS",
+        "date": "2026-09-08 08:23:15",
+        "status": "PENDING",
+        "signal": {
+            "stock": "FINCABLES.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 1297.0,
+            "entry_point": 1297.0,
+            "target_1": 1306.0,
+            "target_2": 1315.0,
+            "target_3": 1325.0,
+            "stop_loss": 1283.5,
+            "reasoning": "Strong momentum breakdown above moving averages with RSI maintained above 70 and positive MACD values supporting an upward continuation."
+        }
+    },
+    {
+        "id": "1788855795.724125",
+        "stock": "DIVISLAB.NS",
+        "date": "2026-09-08 08:23:15",
+        "status": "PENDING",
+        "signal": {
+            "stock": "DIVISLAB.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 9504.5,
+            "entry_point": 9504.5,
+            "target_1": 9535.0,
+            "target_2": 9560.0,
+            "target_3": 9590.0,
+            "stop_loss": 9460.0,
+            "reasoning": "Trading near top historical values above SMA 20 (9462.77) with healthy volume, strong RSI (>70), and robust positive MACD alignment."
+        }
+    },
+    {
+        "id": "1788855796.267813",
+        "stock": "GVT&D.NS",
+        "date": "2026-09-08 08:23:16",
+        "status": "PENDING",
+        "signal": {
+            "stock": "GVT&D.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 4758.0,
+            "entry_point": 4758.0,
+            "target_1": 4785.0,
+            "target_2": 4810.0,
+            "target_3": 4835.0,
+            "stop_loss": 4720.0,
+            "reasoning": "Strong bullish impulse with RSI above 77, high MACD indicator, and price holding gains well above SMA 20 (4718.84)."
+        }
     }
 ]
