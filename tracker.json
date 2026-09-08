@@ -593,7 +593,7 @@
         "id": "1788171039.780312",
         "stock": "ATHERENERG.NS",
         "date": "2026-08-31 10:10:39",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "ATHERENERG.NS",
             "buy_or_sell": "BUY",
@@ -606,7 +606,8 @@
             "target_3": 2080.0,
             "stop_loss": 1580.0,
             "reasoning": "Dramatic high-volume surge over the last two trading sessions with volume increasing to nearly 20M shares. MACD and RSI demonstrate explosive upside continuation."
-        }
+        },
+        "actual_pnl": -8.13
     },
     {
         "id": "1788171040.296107",
@@ -1062,7 +1063,7 @@
         "id": "1788855794.582648",
         "stock": "CRAFTSMAN.NS",
         "date": "2026-09-08 08:23:14",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "CRAFTSMAN.NS",
             "buy_or_sell": "BUY",
@@ -1075,7 +1076,8 @@
             "target_3": 11640.0,
             "stop_loss": 11470.0,
             "reasoning": "Consistently making higher highs with RSI hovering above 70 and MACD expanding upward. Price holds comfortably above key moving averages."
-        }
+        },
+        "actual_pnl": -1.03
     },
     {
         "id": "1788855795.134333",
@@ -1100,7 +1102,7 @@
         "id": "1788855795.724125",
         "stock": "DIVISLAB.NS",
         "date": "2026-09-08 08:23:15",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "DIVISLAB.NS",
             "buy_or_sell": "BUY",
@@ -1113,7 +1115,8 @@
             "target_3": 9590.0,
             "stop_loss": 9460.0,
             "reasoning": "Trading near top historical values above SMA 20 (9462.77) with healthy volume, strong RSI (>70), and robust positive MACD alignment."
-        }
+        },
+        "actual_pnl": 0.74
     },
     {
         "id": "1788855796.267813",
