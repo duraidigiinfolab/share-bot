@@ -123,7 +123,7 @@
         "id": "1787722700.03982",
         "stock": "LT.NS",
         "date": "2026-08-26 05:38:20",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "long term",
@@ -134,7 +134,8 @@
             "target_3": 4550.0,
             "stop_loss": 3940.0,
             "reasoning": "Stock trades above key moving averages (20 and 50 SMAs) with positive MACD crossover indicating sustained bullish momentum."
-        }
+        },
+        "actual_pnl": -3.74
     },
     {
         "id": "1787722721.91788",
@@ -555,7 +556,7 @@
         "id": "1788171035.583669",
         "stock": "CYIENT.NS",
         "date": "2026-08-31 10:10:35",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "CYIENT.NS",
             "buy_or_sell": "BUY",
@@ -568,7 +569,8 @@
             "target_3": 1400.0,
             "stop_loss": 1080.0,
             "reasoning": "Strong bullish momentum with RSI rising to 86.90 and MACD steadily expanding. Volume remains high following consecutive daily gains and a sharp multi-day breakout."
-        }
+        },
+        "actual_pnl": -8.49
     },
     {
         "id": "1788171039.259494",
@@ -791,7 +793,7 @@
         "id": "1788253349.925773",
         "stock": "CYIENT.NS",
         "date": "2026-09-01 09:02:29",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "CYIENT.NS",
             "buy_or_sell": "BUY",
@@ -804,7 +806,8 @@
             "target_3": 1320.0,
             "stop_loss": 1080.0,
             "reasoning": "Massive multi-day breakout from 894 levels up to above 1150 with high volume support. MACD at 69.26 shows tremendous upward momentum."
-        }
+        },
+        "actual_pnl": -7.23
     },
     {
         "id": "1788253350.530632",
@@ -1044,7 +1047,7 @@
         "id": "1788855793.988873",
         "stock": "BHARATFORG.NS",
         "date": "2026-09-08 08:23:13",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "BHARATFORG.NS",
             "buy_or_sell": "BUY",
@@ -1057,7 +1060,8 @@
             "target_3": 2045.0,
             "stop_loss": 2001.0,
             "reasoning": "BHARATFORG exhibits strong bullish momentum with RSI remaining above 70 and MACD showing an upward trend. Price is trading well above SMA 20 (1977.02) and SMA 50 (1958.34)."
-        }
+        },
+        "actual_pnl": -1.81
     },
     {
         "id": "1788855794.582648",
@@ -1083,7 +1087,7 @@
         "id": "1788855795.134333",
         "stock": "FINCABLES.NS",
         "date": "2026-09-08 08:23:15",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "FINCABLES.NS",
             "buy_or_sell": "BUY",
@@ -1096,7 +1100,8 @@
             "target_3": 1325.0,
             "stop_loss": 1283.5,
             "reasoning": "Strong momentum breakdown above moving averages with RSI maintained above 70 and positive MACD values supporting an upward continuation."
-        }
+        },
+        "actual_pnl": 4.35
     },
     {
         "id": "1788855795.724125",
@@ -1122,7 +1127,7 @@
         "id": "1788855796.267813",
         "stock": "GVT&D.NS",
         "date": "2026-09-08 08:23:16",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "GVT&D.NS",
             "buy_or_sell": "BUY",
@@ -1135,6 +1140,7 @@
             "target_3": 4835.0,
             "stop_loss": 4720.0,
             "reasoning": "Strong bullish impulse with RSI above 77, high MACD indicator, and price holding gains well above SMA 20 (4718.84)."
-        }
+        },
+        "actual_pnl": -1.79
     }
 ]
