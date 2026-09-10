@@ -37,7 +37,7 @@
         "id": "1787722507.686127",
         "stock": "ICICIBANK.NS",
         "date": "2026-08-26 05:35:07",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "long term",
@@ -48,7 +48,8 @@
             "target_3": 1620.0,
             "stop_loss": 1385.0,
             "reasoning": "Price maintains a strong uptrend above its 20-day and 50-day SMAs with a healthy RSI of 57.9 indicating continued momentum."
-        }
+        },
+        "actual_pnl": -3.75
     },
     {
         "id": "1787722529.82782",
@@ -774,7 +775,7 @@
         "id": "1788253349.326008",
         "stock": "WELCORP.NS",
         "date": "2026-09-01 09:02:29",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "WELCORP.NS",
             "buy_or_sell": "BUY",
@@ -787,7 +788,8 @@
             "target_3": 2920.0,
             "stop_loss": 2360.0,
             "reasoning": "Strong trend continuation making new high of 2538.80 with RSI over 82 and MACD at 204.79. Steady higher highs and higher lows over the 10-day history indicate powerful bullish momentum."
-        }
+        },
+        "actual_pnl": 9.46
     },
     {
         "id": "1788253349.925773",
@@ -1147,7 +1149,7 @@
         "id": "1789028818.305792",
         "stock": "360ONE.NS",
         "date": "2026-09-10 08:26:58",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "360ONE.NS",
             "buy_or_sell": "BUY",
@@ -1160,7 +1162,8 @@
             "target_3": 1115.5,
             "stop_loss": 1097.5,
             "reasoning": "Consistent price appreciation from 1087.30 to 1103.50 accompanied by an RSI rise from 35.09 to 62.61 and a fresh bullish MACD crossover into positive territory."
-        }
+        },
+        "actual_pnl": -0.78
     },
     {
         "id": "1789028819.057246",
