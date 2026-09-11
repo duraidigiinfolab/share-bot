@@ -1240,5 +1240,100 @@
             "stop_loss": 375.2,
             "reasoning": "Steady upward movement with high volume support, RSI maintaining strength above 71, and MACD trending consistently upwards."
         }
+    },
+    {
+        "id": "1789114985.767354",
+        "stock": "360ONE.NS",
+        "date": "2026-09-11 08:23:05",
+        "status": "PENDING",
+        "signal": {
+            "stock": "360ONE.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 1083.8,
+            "entry_point": 1095.4,
+            "target_1": 1100.0,
+            "target_2": 1105.0,
+            "target_3": 1110.0,
+            "stop_loss": 1088.5,
+            "reasoning": "Strong 10-day momentum with price rising consistently from 1083.80 to 1095.40, RSI expanding to 60.03, and a bullish MACD crossover into positive territory above SMA 20 and SMA 50."
+        }
+    },
+    {
+        "id": "1789114986.444626",
+        "stock": "YESBANK.NS",
+        "date": "2026-09-11 08:23:06",
+        "status": "PENDING",
+        "signal": {
+            "stock": "YESBANK.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 22.61,
+            "entry_point": 23.72,
+            "target_1": 23.95,
+            "target_2": 24.2,
+            "target_3": 24.5,
+            "stop_loss": 23.45,
+            "reasoning": "Powerful high-volume momentum breakout with volume expanding above 31M. RSI shows strong bullish momentum reaching 87.43 along with accelerating MACD positive divergence."
+        }
+    },
+    {
+        "id": "1789114987.074708",
+        "stock": "PINELABS.NS",
+        "date": "2026-09-11 08:23:07",
+        "status": "PENDING",
+        "signal": {
+            "stock": "PINELABS.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 186.81,
+            "entry_point": 193.35,
+            "target_1": 195.8,
+            "target_2": 198.2,
+            "target_3": 200.5,
+            "stop_loss": 189.6,
+            "reasoning": "Sustained upward trend from 186.81 to 193.35 backed by high volume. RSI remains strongly bullish above 74 and MACD continues to expand in positive territory well above SMA 20."
+        }
+    },
+    {
+        "id": "1789114987.6923",
+        "stock": "INDUSTOWER.NS",
+        "date": "2026-09-11 08:23:07",
+        "status": "PENDING",
+        "signal": {
+            "stock": "INDUSTOWER.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 387.25,
+            "entry_point": 389.1,
+            "target_1": 391.0,
+            "target_2": 393.0,
+            "target_3": 395.0,
+            "stop_loss": 386.3,
+            "reasoning": "Strong bullish trend holding firmly above SMA 20 (385.52) and SMA 50 (377.34). RSI consistently stays in overbought bullish territory above 73 with solid volume support."
+        }
+    },
+    {
+        "id": "1789114988.308141",
+        "stock": "CAPLIPOINT.NS",
+        "date": "2026-09-11 08:23:08",
+        "status": "PENDING",
+        "signal": {
+            "stock": "CAPLIPOINT.NS",
+            "buy_or_sell": "BUY",
+            "type": "intraday",
+            "time_period": "1 Day",
+            "open_price": 2741.9,
+            "entry_point": 2775.0,
+            "target_1": 2790.0,
+            "target_2": 2805.0,
+            "target_3": 2820.0,
+            "stop_loss": 2750.0,
+            "reasoning": "Sharp breakout in the last period with RSI rising from 44 to 60.60 and MACD rapidly accelerating upward from -10.54 towards positive territory, breaking previous session highs."
+        }
     }
 ]
