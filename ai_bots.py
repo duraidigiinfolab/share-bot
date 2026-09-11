@@ -1,6 +1,7 @@
 import os
 import json
 import datetime
+import traceback
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
@@ -70,26 +71,28 @@ Schema for each object in the array:
         return []
         
     except Exception as e:
-        print(f"Error generating AI batch signal: {e}")
+        print(f"Error generating AI batch signal for {trade_type}: {e}")
+        traceback.print_exc()
         return []
 
 def analyze_batch(intraday_batch_text, longterm_batch_text):
     """Generates both intraday and long-term batch signals."""
     intraday_signals = []
     long_term_signals = []
-    
+
     if intraday_batch_text:
         print("Running AI Batch Analysis for Intraday...")
         intraday_signals = get_batch_trading_signals(intraday_batch_text, "intraday")
-        
+        print(f"AI returned {len(intraday_signals)} intraday signals.")
+
     if longterm_batch_text:
         print("Running AI Batch Analysis for Investment...")
         long_term_signals = get_batch_trading_signals(longterm_batch_text, "long term")
-    
+        print(f"AI returned {len(long_term_signals)} long-term signals.")
+
     return intraday_signals, long_term_signals
 
 if __name__ == "__main__":
-    # Test script with dummy data
     dummy_data = """
 Stock: RELIANCE.NS
 Current Price: 2950.0
@@ -107,6 +110,5 @@ Recent News Headlines:
 - Reliance signs new green energy deal.
 - Jio profits rise by 12%.
 """
-    i, l = analyze_stock("RELIANCE.NS", dummy_data)
-    print("Intraday:", i)
-    print("Long Term:", l)
+    signals = get_batch_trading_signals(dummy_data, "intraday")
+    print("Signals:", json.dumps(signals, indent=2))

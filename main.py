@@ -3,6 +3,7 @@ import time
 import os
 import requests
 import datetime
+import traceback
 from dotenv import load_dotenv
 
 import data_engine
@@ -14,6 +15,7 @@ load_dotenv()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
+
 def send_telegram(msg):
     if not TELEGRAM_BOT_TOKEN:
         print("Telegram token missing.")
@@ -24,6 +26,7 @@ def send_telegram(msg):
         requests.post(url, json=payload)
     except Exception as e:
         print(f"Telegram Error: {e}")
+
 
 def format_signal_message(stock, signal):
     icon = "🟢 BUY" if signal['buy_or_sell'] == "BUY" else "🔴 SELL"
@@ -38,47 +41,52 @@ def format_signal_message(stock, signal):
     msg += f"💡 *Reasoning:* {signal.get('reasoning', '')}"
     return msg
 
+
 def is_market_open_today():
     today = datetime.datetime.now()
-    if today.weekday() >= 5: # 5=Sat, 6=Sun
+    if today.weekday() >= 5:  # 5=Sat, 6=Sun
         return False
-        
+
     # NSE 2026 Trading Holidays
     nse_holidays_2026 = [
-        "2026-01-26", # Republic Day
-        "2026-03-03", # Holi
-        "2026-03-26", # Shri Ram Navami
-        "2026-03-31", # Mahavir Jayanti
-        "2026-04-03", # Good Friday
-        "2026-04-14", # Dr. Ambedkar Jayanti
-        "2026-05-01", # Maharashtra Day
-        "2026-05-28", # Bakri Id
-        "2026-06-26", # Muharram
-        "2026-09-14", # Ganesh Chaturthi
-        "2026-10-02", # Mahatma Gandhi Jayanti
-        "2026-10-20", # Dussehra
-        "2026-11-10", # Diwali-Balipratipada
-        "2026-11-24", # Prakash Gurpurb
-        "2026-12-25"  # Christmas
+        "2026-01-26",  # Republic Day
+        "2026-03-03",  # Holi
+        "2026-03-26",  # Shri Ram Navami
+        "2026-03-31",  # Mahavir Jayanti
+        "2026-04-03",  # Good Friday
+        "2026-04-14",  # Dr. Ambedkar Jayanti
+        "2026-05-01",  # Maharashtra Day
+        "2026-05-28",  # Bakri Id
+        "2026-06-26",  # Muharram
+        "2026-09-14",  # Ganesh Chaturthi
+        "2026-10-02",  # Mahatma Gandhi Jayanti
+        "2026-10-20",  # Dussehra
+        "2026-11-10",  # Diwali-Balipratipada
+        "2026-11-24",  # Prakash Gurpurb
+        "2026-12-25"   # Christmas
     ]
-    
+
     today_str = today.strftime("%Y-%m-%d")
     if today_str in nse_holidays_2026:
         print(f"Market is closed today for a public holiday: {today_str}")
         return False
-        
+
     return True
 
+
 def run_morning_analysis():
-    """Runs at Market Open to generate new signals."""
+    """Runs at 8:45 AM IST (before market open) to generate new signals."""
     if not is_market_open_today():
         print("Market is closed today.")
         return
-        
-    print("Running Morning Analysis...")
-    
+
+    print("Running Morning Analysis (8:45 AM IST)...")
+
+    # Clean up any legacy status values
+    tracker.standardize_statuses()
+
     accuracy = tracker.get_weekly_accuracy()
-    
+
     msg = (
         "🌅 *Market Open!* Analyzing top stocks...\n\n"
         f"🎯 *Past 7 Days Accuracy:* {accuracy}%\n"
@@ -86,54 +94,60 @@ def run_morning_analysis():
         "⚠️ *SEBI Disclaimer:* Not a SEBI registered analyst. Signals are algorithmically generated for educational & paper-trading purposes only. Not financial advice."
     )
     send_telegram(msg)
-    
+
     # Get Nifty 500 and run through Python Pre-Screener
     tickers = data_engine.get_nifty500_tickers()
     filtered_tickers = data_engine.screen_stocks(tickers)
-    
+
     if not filtered_tickers:
         send_telegram("No high-probability setups found by the screener today.")
         return
-        
+
     send_telegram(f"🔍 Pre-screener found {len(filtered_tickers)} high-probability stocks out of {len(tickers)}. Compiling data for AI Batch Analysis...")
-    
+
     intraday_batch_texts = []
     longterm_batch_texts = []
-    
+
     for ticker in filtered_tickers:
         news = data_engine.get_latest_news(ticker)
-        
-        # Intra
+
+        # Intraday
         intra_data = data_engine.fetch_stock_data(ticker, period="5d", interval="15m")
         if intra_data:
             intraday_batch_texts.append(data_engine.format_data_for_ai(intra_data, news))
-            
-        # Long
+
+        # Long term
         long_data = data_engine.fetch_stock_data(ticker, period="6mo", interval="1d")
         if long_data:
             longterm_batch_texts.append(data_engine.format_data_for_ai(long_data, news))
-            
+
+    if not intraday_batch_texts and not longterm_batch_texts:
+        send_telegram("Failed to fetch market data for screened stocks.")
+        return
+
     # Combine into massive strings
     intraday_combined = "\n\n==========================\n\n".join(intraday_batch_texts)
     longterm_combined = "\n\n==========================\n\n".join(longterm_batch_texts)
-    
+
     send_telegram("🤖 Sending batch data to Gemini AI...")
-    
+
     # 1 Single API call for Intraday, 1 for Long Term
     intraday_signals, longterm_signals = ai_bots.analyze_batch(intraday_combined, longterm_combined)
-    
+
     total_signals = len(intraday_signals) + len(longterm_signals)
     if total_signals == 0:
         send_telegram("AI evaluated all stocks but found 0 valid setups.")
         return
-        
-    # Process Intraday Signals (it's an array now)
+
+    send_telegram(f"✅ AI found {total_signals} valid setups! Sending signals...")
+
+    # Process Intraday Signals
     for signal in intraday_signals:
         if signal.get("buy_or_sell") in ["BUY", "SELL"]:
             stock = signal.get("stock", "UNKNOWN")
             tracker.add_signal(stock, signal)
             send_telegram(format_signal_message(stock, signal))
-            
+
     # Process Long Term Signals
     for signal in longterm_signals:
         if signal.get("buy_or_sell") in ["BUY", "SELL"]:
@@ -141,41 +155,72 @@ def run_morning_analysis():
             tracker.add_signal(stock, signal)
             send_telegram(format_signal_message(stock, signal))
 
+
+def run_midday_evaluation():
+    """Runs at 12:00 PM IST to check if any intraday targets/SL were hit mid-session."""
+    if not is_market_open_today():
+        print("Market is closed today.")
+        return
+
+    print("Running Midday Evaluation (12:00 PM IST)...")
+
+    reports = tracker.evaluate_signals()
+
+    if reports:
+        msg = "🕛 *Midday Update!* Trades completed so far:\n\n" + "\n".join(reports)
+        send_telegram(msg)
+    else:
+        print("No trades completed at midday.")
+
+
 def run_evening_evaluation():
-    """Runs at Market Close to verify if previous signals hit targets."""
+    """Runs at 4:00 PM IST (after market close) to verify all signals and send final report."""
     if not is_market_open_today():
         return
-        
-    print("Running Evening Evaluation...")
+
+    print("Running Evening Evaluation (4:00 PM IST)...")
+
     reports = tracker.evaluate_signals()
-    
+
     if reports:
         msg = "📉 *Market Closed! Accuracy Report:*\n\n" + "\n".join(reports)
         send_telegram(msg)
     else:
         send_telegram("📉 *Market Closed!* No pending trades were completed today.")
 
+    # Send weekly accuracy summary
+    accuracy = tracker.get_weekly_accuracy()
+    total_signals = tracker.get_signal_count("intraday", "this_week") + tracker.get_signal_count("long term", "this_week")
+    send_telegram(
+        f"📊 *Weekly Summary:*\n"
+        f"Accuracy: {accuracy}%\n"
+        f"Total signals this week: {total_signals}"
+    )
+
+
 if __name__ == "__main__":
     import sys
-    
-    # If triggered by GitHub Actions
+
+    # If triggered by GitHub Actions with a CLI argument
     if len(sys.argv) > 1:
         if sys.argv[1] == "--morning":
             run_morning_analysis()
+        elif sys.argv[1] == "--midday":
+            run_midday_evaluation()
         elif sys.argv[1] == "--evening":
             run_evening_evaluation()
         sys.exit(0)
-        
+
     # Local continuous testing mode
     print("Share Market Bot is running! Waiting for schedules...")
-    
-    schedule.every().day.at("09:15").do(run_morning_analysis)
-    schedule.every().day.at("15:30").do(run_evening_evaluation)
-    
-    # Uncomment to test instantly locally:
-    run_morning_analysis()
-    run_evening_evaluation()
-    
+    print("  08:45 IST - Morning Analysis (signal generation)")
+    print("  12:00 IST - Midday Evaluation (target/SL check)")
+    print("  16:00 IST - Evening Evaluation (final report)")
+
+    schedule.every().day.at("08:45").do(run_morning_analysis)
+    schedule.every().day.at("12:00").do(run_midday_evaluation)
+    schedule.every().day.at("16:00").do(run_evening_evaluation)
+
     while True:
         schedule.run_pending()
         time.sleep(60)

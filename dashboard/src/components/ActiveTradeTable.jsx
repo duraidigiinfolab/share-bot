@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
-
-const companyNames = {
-  'RELIANCE': 'Reliance Industries Ltd',
-  'TCS': 'Tata Consultancy Services Ltd',
-  'HDFCBANK': 'HDFC Bank Limited',
-  'ICICIBANK': 'ICICI Bank Ltd',
-  'INFY': 'Infosys Ltd',
-  'SBIN': 'State Bank of India',
-  'BHARTIARTL': 'Bharti Airtel Ltd',
-  'ITC': 'ITC Ltd',
-  'LT': 'Larsen & Toubro Ltd',
-  'BAJFINANCE': 'Bajaj Finance Ltd'
-};
+import { getCompanyName } from '../data/companyNames';
 
 const ActiveTradeTable = ({ trades, title }) => {
   const [expandedRows, setExpandedRows] = useState({});
@@ -66,7 +54,7 @@ const ActiveTradeTable = ({ trades, title }) => {
               const isBuy = signal.buy_or_sell === 'BUY';
               const isExpanded = expandedRows[index];
               const symbol = trade.stock.replace('.NS', '');
-              const fullName = companyNames[symbol] || symbol;
+              const fullName = getCompanyName(symbol);
 
               return (
                 <React.Fragment key={index}>

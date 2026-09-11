@@ -3,7 +3,7 @@
         "id": "1787722412.488479",
         "stock": "TCS.NS",
         "date": "2026-08-26 05:33:32",
-        "status": "WIN (Target 1 Hit!)",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -20,7 +20,7 @@
         "id": "1787722507.119212",
         "stock": "ICICIBANK.NS",
         "date": "2026-08-26 05:35:07",
-        "status": "EXPIRED",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "BUY",
             "type": "intraday",
@@ -55,7 +55,7 @@
         "id": "1787722529.82782",
         "stock": "INFY.NS",
         "date": "2026-08-26 05:35:29",
-        "status": "EXPIRED",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -90,7 +90,7 @@
         "id": "1787722609.445179",
         "stock": "BHARTIARTL.NS",
         "date": "2026-08-26 05:36:49",
-        "status": "WIN (Target 1 Hit!)",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -107,7 +107,7 @@
         "id": "1787722635.548304",
         "stock": "ITC.NS",
         "date": "2026-08-26 05:37:15",
-        "status": "EXPIRED",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",
@@ -142,7 +142,7 @@
         "id": "1787722721.91788",
         "stock": "BAJFINANCE.NS",
         "date": "2026-08-26 05:38:41",
-        "status": "EXPIRED",
+        "status": "LOSS",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "intraday",

@@ -1,17 +1,5 @@
 import React from 'react';
-
-const companyNames = {
-  'RELIANCE': 'Reliance Industries Ltd',
-  'TCS': 'Tata Consultancy Services Ltd',
-  'HDFCBANK': 'HDFC Bank Limited',
-  'ICICIBANK': 'ICICI Bank Ltd',
-  'INFY': 'Infosys Ltd',
-  'SBIN': 'State Bank of India',
-  'BHARTIARTL': 'Bharti Airtel Ltd',
-  'ITC': 'ITC Ltd',
-  'LT': 'Larsen & Toubro Ltd',
-  'BAJFINANCE': 'Bajaj Finance Ltd'
-};
+import { getCompanyName } from '../data/companyNames';
 
 const TradeTable = ({ trades, title }) => {
   if (trades.length === 0) {
@@ -88,7 +76,7 @@ const TradeTable = ({ trades, title }) => {
               }
               
               const symbol = trade.stock.replace('.NS', '');
-              const fullName = companyNames[symbol] || symbol;
+              const fullName = getCompanyName(symbol);
 
               return (
                 <tr key={index} className="border-b border-slate-100 table-row-hover transition-colors">
