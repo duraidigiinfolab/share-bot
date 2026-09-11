@@ -215,7 +215,7 @@
         "id": "1787756172.999058",
         "stock": "AIAENG.NS",
         "date": "2026-08-26 20:26:12",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "long term",
@@ -227,7 +227,8 @@
             "target_3": 3820.0,
             "stop_loss": 4400.0,
             "reasoning": "AIAENG is in a strong continuous downtrend over the past 10 trading days, making consistent lower highs and lower lows. The MACD histogram/line continues to worsen rapidly (-103.32), and RSI has dropped near oversold territory (31.62) without any sign of reversal. Price trades significantly below its 20-day SMA (4519.93) and 50-day SMA (4656.40), pointing to sustained long-term downside momentum."
-        }
+        },
+        "actual_pnl": 3.28
     },
     {
         "id": "1787756197.158764",
@@ -271,7 +272,7 @@
         "id": "1787756242.19708",
         "stock": "AADHARHFC.NS",
         "date": "2026-08-26 20:27:22",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "buy_or_sell": "SELL",
             "type": "long term",
@@ -283,7 +284,8 @@
             "target_3": 430.0,
             "stop_loss": 485.0,
             "reasoning": "The stock has been in a strong 10-day downtrend, declining from 503.20 to 470.35. Technical indicators reflect continued bearish sentiment, with RSI remaining weak at 37.19 and MACD deeply negative at -9.85. The price trades below its 20-day and 50-day moving averages (490.81 and 506.28). Further downside towards the strong support zone near 459.00 is expected, with secondary targets set at 445.00 and 430.00. A stop loss is placed above recent minor resistance at 485.00."
-        }
+        },
+        "actual_pnl": 2.88
     },
     {
         "id": "1787756314.170393",
@@ -1169,7 +1171,7 @@
         "id": "1789028819.057246",
         "stock": "ABSLAMC.NS",
         "date": "2026-09-10 08:26:59",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "ABSLAMC.NS",
             "buy_or_sell": "BUY",
@@ -1182,13 +1184,14 @@
             "target_3": 1112.5,
             "stop_loss": 1080.5,
             "reasoning": "Strong bullish momentum with price holding above the 20 SMA (1070.48), sustained RSI above 70, and MACD expanding positively to 11.76."
-        }
+        },
+        "actual_pnl": 1.71
     },
     {
         "id": "1789028819.747142",
         "stock": "CHOICEIN.NS",
         "date": "2026-09-10 08:26:59",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "CHOICEIN.NS",
             "buy_or_sell": "BUY",
@@ -1201,13 +1204,14 @@
             "target_3": 779.5,
             "stop_loss": 766.0,
             "reasoning": "Powerful uptrend with sharp MACD expansion from 1.37 to 5.02 and RSI strengthening into robust bullish territory around 78.91."
-        }
+        },
+        "actual_pnl": -1.39
     },
     {
         "id": "1789028820.459696",
         "stock": "BHARTIARTL.NS",
         "date": "2026-09-10 08:27:00",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "BHARTIARTL.NS",
             "buy_or_sell": "BUY",
@@ -1220,13 +1224,14 @@
             "target_3": 1858.5,
             "stop_loss": 1835.5,
             "reasoning": "Solid breakout trend from 1826.90 to 1843.30 with MACD turning strongly positive (3.94) and RSI rising from 53.59 to near 70."
-        }
+        },
+        "actual_pnl": -0.66
     },
     {
         "id": "1789028821.131185",
         "stock": "DABUR.NS",
         "date": "2026-09-10 08:27:01",
-        "status": "PENDING",
+        "status": "LOSS",
         "signal": {
             "stock": "DABUR.NS",
             "buy_or_sell": "BUY",
@@ -1239,7 +1244,8 @@
             "target_3": 380.5,
             "stop_loss": 375.2,
             "reasoning": "Steady upward movement with high volume support, RSI maintaining strength above 71, and MACD trending consistently upwards."
-        }
+        },
+        "actual_pnl": -0.23
     },
     {
         "id": "1789114985.767354",
@@ -1283,7 +1289,7 @@
         "id": "1789114987.074708",
         "stock": "PINELABS.NS",
         "date": "2026-09-11 08:23:07",
-        "status": "PENDING",
+        "status": "WIN",
         "signal": {
             "stock": "PINELABS.NS",
             "buy_or_sell": "BUY",
@@ -1296,7 +1302,8 @@
             "target_3": 200.5,
             "stop_loss": 189.6,
             "reasoning": "Sustained upward trend from 186.81 to 193.35 backed by high volume. RSI remains strongly bullish above 74 and MACD continues to expand in positive territory well above SMA 20."
-        }
+        },
+        "actual_pnl": 4.56
     },
     {
         "id": "1789114987.6923",
